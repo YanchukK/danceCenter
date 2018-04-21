@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('branch', 'BranchController');
+
+Route::get('/branches', 'MainController@branches')->name('main_branches');
