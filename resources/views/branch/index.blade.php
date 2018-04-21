@@ -12,10 +12,10 @@
                     {{--</div>--}}
                     {{--@endif--}}
                     <div class="panel-body">
-                        {{ link_to_route('branch.create', 'Create branch', null, ['class' => 'rounded-0 btn btn-outline-info btn-lg btn-block', 'style' => 'margin: 0 1rem 1rem 1rem']) }}
-                        <div class="d-flex justify-content-center flex-sm-column flex-md-row">
+                        <div class="d-flex justify-content-between flex-sm-column flex-md-row flex-wrap">
+                            {{ link_to_route('branch.create', 'Create branch', null, ['class' => 'rounded-0 btn btn-outline-info btn-lg btn-block']) }}
                             @foreach ($branches as $model)
-                                <div class="card m-3" style="width: 20rem;">
+                                <div class="rounded-0 card mt-3" style="width: 22rem;">
                                     <img class="card-img-top"
                                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThcGuG6AcofBxB5bJHdyv__3BSU7_m9FDB_-gZby54l3VWSG7R"
                                          alt="Card image cap">
