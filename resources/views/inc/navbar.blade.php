@@ -13,18 +13,6 @@
                 <li class="nav-item">
                     {{ link_to_route('main_branches', 'Branches') }}
                 </li>
-                {{--<li class="nav-item active">--}}
-                    {{--<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>--}}
-                {{--</li>--}}
-                {{--<li class="nav-item">--}}
-                    {{--<a class="nav-link" href="/about">About us</a>--}}
-                {{--</li>--}}
-                {{--<li class="nav-item">--}}
-                    {{--<a class="nav-link " href="/services">Services</a>--}}
-                {{--</li>--}}
-                {{--<li class="nav-item">--}}
-                    {{--<a class="nav-link" href="/post">Blog</a>--}}
-                {{--</li>--}}
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -42,7 +30,7 @@
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                            <a href="/dashboard" class="dropdown-item">
+                            <a href="/home" class="dropdown-item">
                                 Dashboard
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"

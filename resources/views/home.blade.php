@@ -14,6 +14,7 @@
                             </div>
                         @endif
                         {{ link_to_route('branch.index', 'Manage branches', null, ['class' => 'btn btn-info btn-lg btn-block']) }}
+                        {{ link_to_route('branch.index', 'Manage branches', null, ['class' => 'btn btn-info btn-lg btn-block']) }}
                     </div>
                 </div>
             </div>
