@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
-use App\Http\Requests\GroupRequest;
+use App\Http\Requests\TeacherRequest;
+use App\Teacher;
 use Illuminate\Http\Request;
 
-class GroupController extends Controller
+class TeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Group $group)
+    public function index(Teacher $teacher)
     {
-        $groups = $group->all();
+        $teachers = $teacher->all();
 //        dd($branches->all());
-        return view('group.index', compact('groups'));
+        return view('teacher.index', compact('teachers'));
     }
 
     /**
@@ -27,7 +27,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('group.create');
+        return view('teacher.create');
     }
 
     /**
@@ -36,64 +36,64 @@ class GroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GroupRequest $request, Group $group)
+    public function store(TeacherRequest $request, Teacher $teacher)
     {
-        $group
+        $teacher
             ->create($request->all())
             ->save();
-        return redirect()->route('group.index');
+        return redirect()->route('teacher.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Group  $group
+     * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function show(Group $group)
+    public function show(Teacher $teacher)
     {
-        $groups = $group->findOrFail($group->id);
+        $teachers = $teacher->findOrFail($teacher->id);
 
-        return view('group.show', compact('groups'));
+        return view('teacher.show', compact('teachers'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Group  $group
+     * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function edit(Group $group)
+    public function edit(Teacher $teacher)
     {
-        $groups = $group->findOrFail($group->id);
+        $teachers = $teacher->findOrFail($teacher->id);
 
-        return view('group.edit', compact('groups'));
+        return view('teacher.edit', compact('teachers'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Group  $group
+     * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function update(GroupRequest $request, Group $group)
+    public function update(TeacherRequest $request, Teacher $teacher)
     {
-        $group->update($request->all());
+        $teacher->update($request->all());
 
-        return redirect()->route('group.index');
+        return redirect()->route('teacher.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Group  $group
+     * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Group $group)
+    public function destroy(Teacher $teacher)
     {
-        $group->delete();
+        $teacher->delete();
 
-        return redirect()->route('group.index');
+        return redirect()->route('teacher.index');
     }
 }

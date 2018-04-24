@@ -20,5 +20,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('branch', 'BranchController');
+Route::resource('group', 'GroupController');
+Route::resource('teacher', 'TeacherController');
+Route::resource('customer', 'CustomerController');
+Route::resource('style', 'StyleController');
+Route::resource('timetable', 'TimetableController');
 
 Route::get('/branches', 'MainController@branches')->name('main_branches');

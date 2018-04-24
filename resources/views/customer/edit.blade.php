@@ -3,7 +3,7 @@
 @section('panel')
     <div class="panel-heading container-fluid">
         <div class="form-group">
-            <div class="centered-child col-md-11 col-sm-10 col-xs-10"><b>New group</b></div>
+            <div class="centered-child col-md-11 col-sm-10 col-xs-10"><b>New customer</b></div>
         </div>
     </div>
 
@@ -17,11 +17,11 @@
         {{--</ul>--}}
         {{--</div>--}}
         {{--@endif--}}
-        {{--        {!! Form::open(['route' => 'branch.store']) !!}--}}
-        {{--        {{dd($branches)}}--}}
-        {!! Form::model($groups, ['route' => ['group.update', $groups->id], 'method' => 'PUT']) !!}
+{{--        {!! Form::open(['route' => 'branch.store']) !!}--}}
+{{--        {{dd($branches)}}--}}
+        {!! Form::model($customers, ['route' => ['customer.update', $customers->id], 'method' => 'PUT']) !!}
 
-        @include('group._form')
+        @include('customer._form')
 
         <div class="form-group">
             {!! Form::button('Update', ['type' => 'submit', 'class' => 'btn btn-block btn-lg btn-outline-success']) !!}
@@ -30,4 +30,4 @@
         {!! Form::close() !!}
 
     </div>
-@endsection
+    @endsection

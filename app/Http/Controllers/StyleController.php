@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
-use App\Http\Requests\GroupRequest;
+use App\Http\Requests\StyleRequest;
+use App\Style;
 use Illuminate\Http\Request;
 
-class GroupController extends Controller
+class StyleController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Group $group)
+    public function index(Style $style)
     {
-        $groups = $group->all();
+        $styles = $style->all();
 //        dd($branches->all());
-        return view('group.index', compact('groups'));
+        return view('style.index', compact('styles'));
     }
 
     /**
@@ -27,7 +27,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('group.create');
+        return view('style.create');
     }
 
     /**
@@ -36,64 +36,64 @@ class GroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GroupRequest $request, Group $group)
+    public function store(StyleRequest $request, Style $style)
     {
-        $group
+        $style
             ->create($request->all())
             ->save();
-        return redirect()->route('group.index');
+        return redirect()->route('style.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Group  $group
+     * @param  \App\Style  $style
      * @return \Illuminate\Http\Response
      */
-    public function show(Group $group)
+    public function show(Style $style)
     {
-        $groups = $group->findOrFail($group->id);
+        $styles = $style->findOrFail($style->id);
 
-        return view('group.show', compact('groups'));
+        return view('style.show', compact('styles'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Group  $group
+     * @param  \App\Style  $style
      * @return \Illuminate\Http\Response
      */
-    public function edit(Group $group)
+    public function edit(Style $style)
     {
-        $groups = $group->findOrFail($group->id);
+        $styles = $style->findOrFail($style->id);
 
-        return view('group.edit', compact('groups'));
+        return view('style.edit', compact('styles'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Group  $group
+     * @param  \App\Style  $style
      * @return \Illuminate\Http\Response
      */
-    public function update(GroupRequest $request, Group $group)
+    public function update(Request $request, Style $style)
     {
-        $group->update($request->all());
+        $style->update($request->all());
 
-        return redirect()->route('group.index');
+        return redirect()->route('style.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Group  $group
+     * @param  \App\Style  $style
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Group $group)
+    public function destroy(Style $style)
     {
-        $group->delete();
+        $style->delete();
 
-        return redirect()->route('group.index');
+        return redirect()->route('style.index');
     }
 }

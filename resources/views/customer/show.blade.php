@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Branches</div>
+                    <div class="panel-heading">Customers</div>
                     {{--@if(session()->has('message'))--}}
                     {{--<div class="alert alert-success">--}}
                     {{--{{ session()->get('message') }}--}}
@@ -21,16 +21,16 @@
                                          alt="Card image cap">
                                     <div class="card-body">
 {{--                                        {{dd($groups)}}--}}
-                                        <h4 class="card-title">{{$groups->title}}</h4>
+                                        <h4 class="card-title">{{$customers->name}} {{$customer->l_name}}</h4>
                                         <div class="card-text">
-                                            <h6>teacher_id</h6>
-                                            <p>style_id</p>
-                                            <p>branch_id</p>
-                                            <p>{{$groups->date_time}}</p>
+                                            <h6>{{$customer->email}}</h6>
+                                            <p>{{$customer->login}}</p>
+                                            <p>{{$customer->password}}</p>
+                                            <p>{{$customers->p_number}}</p>
                                         </div>
                                         <div class="d-flex flex-sm-row flex-xs-column justify-content-center">
-                                            {{ link_to_route('group.edit', 'Update', $groups->id, ['class' => 'btn btn-lg btn-primary rounded-0 h-50 px-4']) }}
-                                            {{Form::open(['class' => 'confirm-delete', 'route' => ['group.destroy', $groups->id], 'method' => 'DELETE'])}}
+                                            {{ link_to_route('customer.edit', 'Update', $customers->id, ['class' => 'btn btn-lg btn-primary rounded-0 h-50 px-4']) }}
+                                            {{Form::open(['class' => 'confirm-delete', 'route' => ['customer.destroy', $customers->id], 'method' => 'DELETE'])}}
                                             {{Form::button('Delete', ['class' => 'btn btn-danger btn-lg rounded-0 px-4', 'type' => 'submit'])}}
                                             {{Form::close()}}
                                         </div>
