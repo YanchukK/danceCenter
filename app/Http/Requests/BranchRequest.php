@@ -24,7 +24,7 @@ class BranchRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'branch_img' => 'image:jpg,png|max:50000',
         ];
     }
 }

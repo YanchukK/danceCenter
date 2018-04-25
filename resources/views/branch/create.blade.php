@@ -17,7 +17,7 @@
         {{--</ul>--}}
         {{--</div>--}}
         {{--@endif--}}
-        {!! Form::open(['route' => 'branch.store']) !!}
+        {!! Form::open(['route' => 'branch.store', 'enctype' => 'multipart/form-data']) !!}
 
         @include('branch._form')
 

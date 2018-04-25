@@ -14,14 +14,18 @@ class CreateGroupsTable extends Migration
     public function up()
     {
         Schema::create('groups', function (Blueprint $table) {
+//            $table->engine = 'InnoDB';
+
             $table->increments('id');
             $table->text('title')->nullable();
             $table->text('date_time')->nullable();
-            $table->integer('teacher_id')->nullable();
-            $table->integer('style_id')->nullable();
-            $table->integer('branch_id')->nullable();
             $table->timestamps();
         });
+
+//        Schema::table('groups', function ($table) {
+//            $table->integer('teacher_id')->unsigned();
+//            $table->foreign('teacher_id')->references('id')->on('teachers');
+//        });
     }
 
     /**

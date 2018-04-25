@@ -14,8 +14,10 @@ class CreateTeachersTable extends Migration
     public function up()
     {
         Schema::create('teachers', function (Blueprint $table) {
+//            $table->engine = 'InnoDB';
+
             $table->increments('id');
-            $table->string('login')->nullable();
+            $table->string('login');
             $table->string('password')->nullable();
             $table->string('name')->nullable();
             $table->string('l_name')->nullable();

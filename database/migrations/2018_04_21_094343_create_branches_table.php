@@ -20,6 +20,7 @@ class CreateBranchesTable extends Migration
             $table->text('address');
             $table->integer('p_number');
             $table->text('w_hours');
+            $table->string('branch_img');
             $table->timestamps();
         });
     }

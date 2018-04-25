@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use App\Branch;
 use App\Http\Requests\BranchRequest;
 use Illuminate\Http\Request;
+use App\Traits\ImageTrait;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 
 class BranchController extends Controller
 {
+    use ImageTrait;
+
+    public $path = 'branch';
     /**
      * Display a listing of the resource.
      *
@@ -38,10 +44,24 @@ class BranchController extends Controller
      */
     public function store(BranchRequest $request, Branch $branch)
     {
-//        dd($branch);
+        $recivedImage = $request->file('branch_img');
+
+        if ( $request->hasFile('branch_img') ) {
+            $filenameToUpload = $this->uploadImage($recivedImage, $this->path);
+
+        }
+        else {
+            $filenameToUpload = 'noimage.jpg';
+        }
+
+        $requestToUpload = $request->all();
+        unset($requestToUpload['branch_img']);
+        $requestToUpload['branch_img'] = $filenameToUpload;
+
         $branch
-            ->create($request->all())
+            ->create($requestToUpload)
             ->save();
+
         return redirect()->route('branch.index');
     }
 
@@ -68,7 +88,7 @@ class BranchController extends Controller
     {
 
         $branches = $branch->findOrFail($branch->id);
-
+//        dd($branches);
         return view('branch.edit', compact('branches'));
     }
 
@@ -81,7 +101,21 @@ class BranchController extends Controller
      */
     public function update(BranchRequest $request, Branch $branch)
     {
-        $branch->update($request->all());
+        $recivedImage = $request->file('branch_img');
+
+        if ( $request->hasFile('branch_img') ) {
+            $filenameToUpload = $this->uploadImage($recivedImage, $this->path);
+
+        }
+        else {
+            $filenameToUpload = 'noimage.jpg';
+        }
+
+        $requestToUpload = $request->all();
+        unset($requestToUpload['branch_img']);
+        $requestToUpload['branch_img'] = $filenameToUpload;
+
+        $branch->update($requestToUpload);
 
         return redirect()->route('branch.index');
     }
@@ -94,6 +128,8 @@ class BranchController extends Controller
      */
     public function destroy(Branch $branch)
     {
+        $this->deleteImage($branch->branch_img, $this->path);
+
         $branch->delete();
 
         return redirect()->route('branch.index');

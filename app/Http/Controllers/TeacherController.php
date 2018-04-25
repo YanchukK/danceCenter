@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use App\Http\Requests\TeacherRequest;
 use App\Teacher;
 use Illuminate\Http\Request;
@@ -25,8 +26,9 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Teacher $teacher)
     {
+        dd($teacher->groups);
         return view('teacher.create');
     }
 

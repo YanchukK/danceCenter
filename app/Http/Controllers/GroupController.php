@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\Http\Requests\GroupRequest;
+use App\Teacher;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -25,8 +26,9 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Group $group)
     {
+        dd($group->style);
         return view('group.create');
     }
 
