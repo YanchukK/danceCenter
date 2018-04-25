@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Branch;
 use App\Group;
 use App\Http\Requests\GroupRequest;
+use App\Style;
 use App\Teacher;
 use Illuminate\Http\Request;
 
@@ -26,10 +28,13 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Group $group)
+    public function create(Teacher $teacher, Branch $branch, Style $style)
     {
-        dd($group->style);
-        return view('group.create');
+        $teachers_list = $teacher->getSelectList();
+        $branches_list = $branch->getSelectList();
+        $styles_list = $style->getSelectList('title');
+
+        return view('group.create', compact('teachers_list','branches_list', 'styles_list'));
     }
 
     /**

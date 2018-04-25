@@ -1,12 +1,28 @@
 <div class="form-group">
     {!!Form::text('title', null, ['class' => 'form-control', 'placeholder' => ' title', 'required']) !!}
     <br>
-    {{--{!!Form::text('teacher_id', null, ['class' => 'form-control', 'placeholder' => 'Teacher name']) !!}--}}
-    {{--<br>--}}
-    {{--{!!Form::text('style_id', null, ['class' => 'form-control', 'placeholder' => ' Style name']) !!}--}}
-    {{--<br>--}}
-    {{--{!!Form::text('branch_id', null, ['class' => 'form-control', 'placeholder' => 'Branch name']) !!}--}}
-    {{--<br>--}}
+    {!! Form::select(
+         'teacher_id',
+         $teachers_list,
+         isset($selected_teachers) ? $selected_teachers : null,
+         ['class' => 'form-control', 'required']
+     ) !!}
+    <br>
+    {!! Form::select(
+         'style_id',
+         $styles_list,
+         isset($selected_styles) ? $selected_styles : null,
+         ['class' => 'form-control', 'required']
+     ) !!}
+    <br>
+    {!! Form::select(
+         'branch_id',
+         $branches_list,
+         isset($selected_branches) ? $selected_branches : null,
+         ['class' => 'form-control', 'required']
+     ) !!}
+    <br>
+
     {!!Form::text('date_time', null, ['class' => 'form-control', 'type' => 'date', 'placeholder' => 'Data&Time of training']) !!}
     <br>
     <p></p>
