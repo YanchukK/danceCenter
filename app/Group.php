@@ -19,4 +19,8 @@ class Group extends Model
     public function style  () {
         return $this->belongsTo(Style::class);
     }
+
+    public function customers () {
+        return $this->belongsToMany(Customer::class);
+    }
 }

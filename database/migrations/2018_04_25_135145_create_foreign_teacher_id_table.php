@@ -21,6 +21,7 @@ class CreateForeignTeacherIdTable extends Migration
             $table->integer('style_id')->unsigned();
             $table->foreign('style_id')->references('id')->on('styles');
         });
+
     }
 
     /**

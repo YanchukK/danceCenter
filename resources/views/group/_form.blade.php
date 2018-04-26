@@ -22,6 +22,13 @@
          ['class' => 'form-control', 'required']
      ) !!}
     <br>
+    {!! Form::select(
+         'customer_id[]',
+         $customers_list,
+         isset($selected_customers) ? $selected_customers : null,
+         ['class' => 'form-control', 'required', 'multiple']
+     ) !!}
+    <br>
 
     {!!Form::text('date_time', null, ['class' => 'form-control', 'type' => 'date', 'placeholder' => 'Data&Time of training']) !!}
     <br>
