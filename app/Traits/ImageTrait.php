@@ -13,8 +13,27 @@ use Illuminate\Support\Facades\Storage;
 
 trait ImageTrait
 {
-    public function uploadImage($imageToUploading, $path)
+    private function uploadImage ($request, $path) {
+
+        $recivedImage = $request->file($path.'_img');
+
+        if ( $request->hasFile($path.'_img') ) {
+            $filenameToUpload = $this->prepareImage($recivedImage, $path);
+        }
+        else {
+            $filenameToUpload = 'noimage.jpg';
+        }
+
+        $requestToUpload = $request->all();
+        unset($requestToUpload[$path.'_img']);
+        $requestToUpload[$path.'_img'] = $filenameToUpload;
+
+        return $requestToUpload;
+    }
+
+    public function prepareImage($imageToUploading, $path)
     {
+        //==============================================================================
         //upload file
         //todo $request->file('cover_image') == $imageToUploading
         //Get filename with the extention

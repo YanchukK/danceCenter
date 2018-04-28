@@ -17,7 +17,7 @@
                             @foreach ($customers as $model)
                                 <div class="rounded-0 card mt-3" style="width: 22rem;">
                                     <img class="card-img-top"
-                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThcGuG6AcofBxB5bJHdyv__3BSU7_m9FDB_-gZby54l3VWSG7R"
+                                         src="/storage/img/customer/{{$model->customer_img}}"
                                          alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title">{{$model->name}} {{$model->l_name}}</h4>

@@ -44,19 +44,8 @@ class BranchController extends Controller
      */
     public function store(BranchRequest $request, Branch $branch)
     {
-        $recivedImage = $request->file('branch_img');
 
-        if ( $request->hasFile('branch_img') ) {
-            $filenameToUpload = $this->uploadImage($recivedImage, $this->path);
-
-        }
-        else {
-            $filenameToUpload = 'noimage.jpg';
-        }
-
-        $requestToUpload = $request->all();
-        unset($requestToUpload['branch_img']);
-        $requestToUpload['branch_img'] = $filenameToUpload;
+        $requestToUpload = $this->uploadImage($request, $this->path);
 
         $branch
             ->create($requestToUpload)
@@ -101,19 +90,8 @@ class BranchController extends Controller
      */
     public function update(BranchRequest $request, Branch $branch)
     {
-        $recivedImage = $request->file('branch_img');
-
-        if ( $request->hasFile('branch_img') ) {
-            $filenameToUpload = $this->uploadImage($recivedImage, $this->path);
-
-        }
-        else {
-            $filenameToUpload = 'noimage.jpg';
-        }
-
-        $requestToUpload = $request->all();
-        unset($requestToUpload['branch_img']);
-        $requestToUpload['branch_img'] = $filenameToUpload;
+//        TODO Придумать удалиение проапдейченных изображений
+        $requestToUpload = $this->uploadImage($request, $this->path);
 
         $branch->update($requestToUpload);
 

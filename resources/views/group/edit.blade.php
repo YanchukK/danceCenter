@@ -7,6 +7,7 @@
         </div>
     </div>
 
+{{--    {{dump($groups)}}--}}
     <div class="panel-body">
         {{--@if ($errors->any())--}}
         {{--<div class="alert alert-danger">--}}

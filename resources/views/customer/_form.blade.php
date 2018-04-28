@@ -11,5 +11,8 @@
     <br>
     {!!Form::text('p_number', null, ['class' => 'form-control', 'placeholder' => 'phone number']) !!}
     <br>
+    <div class="form-group">
+        {{Form::file('customer_img')}}
+    </div>
     <p></p>
 </div>

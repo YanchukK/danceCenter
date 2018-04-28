@@ -23,6 +23,7 @@ class CreateTeachersTable extends Migration
             $table->string('l_name')->nullable();
             $table->string('email')->nullable();
             $table->bigInteger('p_number')->nullable();
+            $table->integer('middleware')->default(2); // 2 - teachers
             $table->timestamps();
         });
     }

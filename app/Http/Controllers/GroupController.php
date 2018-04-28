@@ -20,8 +20,11 @@ class GroupController extends Controller
     public function index(Group $group)
     {
         $groups = $group->all();
-//        dd($branches->all());
-        return view('group.index', compact('groups'));
+
+//        dd($group->get()[0]->teacher);
+//        $teachers = Teacher::has('groups')->get();
+        return view('group.index', compact('groups')
+        );
     }
 
     /**
@@ -31,6 +34,8 @@ class GroupController extends Controller
      */
     public function create(Teacher $teacher, Branch $branch, Style $style, Customer $customer)
     {
+//        TODO Переделать! что бы вся информация бралась с группы
+
         $teachers_list = $teacher->getSelectList();
         $branches_list = $branch->getSelectList();
         $styles_list = $style->getSelectList('title');
@@ -52,24 +57,14 @@ class GroupController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GroupRequest $request, Group $group, Customer $customer)
+    public function store(GroupRequest $request, Group $group)
     {
+
         $group
-            ->create($request->all())
+            ->create($request->except('customer_id'))
             ->customers()
-            ->sync([1,3]);
-//            ->save();
-//        dd($request->input('customer_id')[0]);
+            ->sync($request->customer_id);
 
-
-//        dd( $customer->groups()->getRelatedIds() );
-
-//            $request->input('customer_id')[0],
-//            $group->all()->last()->id
-//        $r = [1,2];
-////        $customer->groups()->sync([1,2], false);
-//        $group->customers()->attach([1,2]);
-//        $customer->groups()->attach([1,2]);
         return redirect()->route('group.index');
     }
 
@@ -91,12 +86,28 @@ class GroupController extends Controller
      *
      * @param  \App\Group $group
      * @return \Illuminate\Http\Response
+     * ===================================================================
+     * ===================================================================
+     * ==== $branch->all() - когда вызывается модель  ====================
+     * ==== $group->branch->get() - когда вызывается связанная модель ====
+     * ===================================================================
+     * ===================================================================
      */
-    public function edit(Group $group)
+    public function edit(Group $group, Branch $branch, Teacher $teacher, Customer $customer, Style $style)
     {
         $groups = $group->findOrFail($group->id);
-
-        return view('group.edit', compact('groups'));
+        $teachers_list = $teacher->getSelectList();
+        $branches_list = $branch->getSelectList();
+        $styles_list = $style->getSelectList('title');
+        $customers_list = $customer->getSelectList();
+//        dd($groups);
+        return view('group.edit', compact(
+            'teachers_list',
+            'branches_list',
+            'styles_list',
+            'customers_list',
+            'groups'
+        ));
     }
 
     /**

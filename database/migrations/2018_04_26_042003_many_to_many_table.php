@@ -19,6 +19,7 @@ class ManyToManyTable extends Migration
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->integer('group_id')->unsigned()->index()->nullable();
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->unique(['group_id','customer_id']);
         });
     }
 

@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Http\Requests\CustomerRequest;
+use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    use ImageTrait;
+
+    public $path = 'customer';
     /**
      * Display a listing of the resource.
      *
@@ -38,8 +42,10 @@ class CustomerController extends Controller
      */
     public function store(CustomerRequest $request, Customer $customer)
     {
+        $requestToUpload = $this->uploadImage($request, $this->path);
+//        dd($requestToUpload);
         $customer
-            ->create($request->all())
+            ->create($requestToUpload)
             ->save();
         return redirect()->route('customer.index');
     }

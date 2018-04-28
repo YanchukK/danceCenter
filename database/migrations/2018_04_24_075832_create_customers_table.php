@@ -21,6 +21,8 @@ class CreateCustomersTable extends Migration
             $table->string('login');
             $table->string('password');
             $table->bigInteger('p_number');
+            $table->string('customer_img');
+            $table->integer('middleware')->default(3); // 3 its only customers
             $table->timestamps();
         });
     }

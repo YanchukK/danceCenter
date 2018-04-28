@@ -22,9 +22,9 @@
                                     <div class="card-body">
                                         <h4 class="card-title">{{$model->title}}</h4>
                                         <div class="card-text">
-                                            <h6>teacher_id</h6>
-                                            <p>style_id</p>
-                                            <p>branch_id</p>
+                                            <h6>{{$model->teacher->name}} {{$model->teacher->l_name}}</h6>
+                                            <p>{{$model->style->title}}</p>
+                                            <p>{{$model->branch->title}}</p>
                                             <p>{{$model->date_time}}</p>
                                         </div>
                                         <div class="d-flex flex-sm-row flex-xs-column justify-content-center">

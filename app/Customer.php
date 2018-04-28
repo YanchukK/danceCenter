@@ -9,7 +9,7 @@ class Customer extends Model
 {
     use Selectable;
 
-    protected $fillable = ['name', 'l_name', 'email', 'login', 'password', 'p_number'];
+    protected $fillable = ['name', 'l_name', 'email', 'login', 'password', 'p_number', 'customer_img'];
 
     public function groups () {
         return $this->belongsToMany(Group::class);

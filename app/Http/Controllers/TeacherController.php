@@ -28,7 +28,7 @@ class TeacherController extends Controller
      */
     public function create(Teacher $teacher)
     {
-        dd($teacher->groups);
+//        dd($teacher->groups);
         return view('teacher.create');
     }
 
