@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
-class CustomerMiddleware
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -14,11 +13,14 @@ class CustomerMiddleware
      * @param  \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $admin = '', $customer = '', $teacher = '')
     {
-        if (Auth::user()->middleware == '3c') {
+
+        $check = $request->user()->middleware;
+        if ($check == $admin || $check == $customer || $check == $teacher) {
             return $next($request);
         }
+
         return redirect('/');
     }
 }

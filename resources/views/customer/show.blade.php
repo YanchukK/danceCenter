@@ -17,15 +17,15 @@
 {{--                            @foreach ($groups as $model)--}}
                                 <div class="rounded-0 card mt-3 w-100 h-25">
                                     <img class="card-img-top h-25"
-                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThcGuG6AcofBxB5bJHdyv__3BSU7_m9FDB_-gZby54l3VWSG7R"
+                                         src="/storage/img/customer/{{$customers->customer_img}}"
                                          alt="Card image cap">
                                     <div class="card-body">
 {{--                                        {{dd($groups)}}--}}
-                                        <h4 class="card-title">{{$customers->name}} {{$customer->l_name}}</h4>
+                                        <h4 class="card-title">{{$customers->name}} {{$customers->l_name}}</h4>
                                         <div class="card-text">
-                                            <h6>{{$customer->email}}</h6>
-                                            <p>{{$customer->login}}</p>
-                                            <p>{{$customer->password}}</p>
+                                            <h6>{{$customers->email}}</h6>
+                                            <p>{{$customers->login}}</p>
+                                            <p>{{$customers->password}}</p>
                                             <p>{{$customers->p_number}}</p>
                                         </div>
                                         <div class="d-flex flex-sm-row flex-xs-column justify-content-center">

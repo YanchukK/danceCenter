@@ -13,7 +13,10 @@
                     {{--@endif--}}
                     <div class="panel-body">
                         <div class="d-flex justify-content-between flex-sm-column flex-md-row flex-wrap">
-                            {{ link_to_route('group.create', 'Create group', null, ['class' => 'rounded-0 btn btn-outline-info btn-lg btn-block']) }}
+                            @if(Illuminate\Support\Facades\Auth::user()->middleware == '1a')
+                                {{ link_to_route('group.create', 'Create group', null, ['class' => 'rounded-0 btn btn-outline-info btn-lg btn-block']) }}
+                            @endIf
+{{--                            {{dd($groups)}}--}}
                             @foreach ($groups as $model)
                                 <div class="rounded-0 card mt-3" style="width: 22rem;">
                                     <img class="card-img-top"

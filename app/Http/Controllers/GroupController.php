@@ -9,6 +9,7 @@ use App\Http\Requests\GroupRequest;
 use App\Style;
 use App\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
@@ -17,14 +18,56 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Group $group)
+    public function index(Group $group, Customer $customer)
     {
-        $groups = $group->all();
+//        dd($group->all());
+        if (Auth::user()->middleware == '2t') {
 
-//        dd($group->get()[0]->teacher);
-//        $teachers = Teacher::has('groups')->get();
-        return view('group.index', compact('groups')
-        );
+            foreach ($group->all() as $groupsTo) {
+                $groupsWithTeacher = $groupsTo->teacher->where('email', Auth::user()->email)->get();
+            }
+
+            $groups = $group->where('teacher_id', $groupsWithTeacher->first()->id)->get();
+
+            return view('group.index', compact('groups'));
+        }
+
+        if (Auth::user()->middleware == '3c') {
+            $email = Auth::user()->email;
+
+            foreach ($group->all() as $groupItems) { // SEARCH CURRENT CUSTOMER ID
+
+                if ($groupItems->customers->where('email', $email)) {
+                    $customerId = $groupItems->customers->where('email', $email)->first()->id; // todo maybe must be array
+                    break;
+                }
+            }
+
+            foreach ($group->all() as $groupItems) {
+                $pivots[] = $groupItems->customers->first()->pivot;
+            }
+            //todo Найти пользователей с пивот айди
+            //todo написать метод для вывода пользователей без форИч
+            //todo Возможно создать колонку в юзерах з кастомер айди или тичер айди, скорее всего нужно создать, лучше создать отдельный метод
+
+            foreach ($pivots as $pivot) {  // SEARCH GROUPS with CUSTOMERS ids
+                if ($customerId == $pivot->customer_id) {
+                    $groupsArray[] = $group->where('id', $pivot->group_id)->get();
+                }
+            }
+
+            foreach ($groupsArray as $groups) { // collection in collection TO collection
+//                dump($group->first());
+                $groupsToCollect[] = $groups->first();
+            }
+            $groups = collect($groupsToCollect);
+
+            return view('group.index', compact('groups'));
+        }
+
+        $groups = $group->all();
+        dd($groups);
+        return view('group.index', compact('groups'));
     }
 
     /**
@@ -34,7 +77,6 @@ class GroupController extends Controller
      */
     public function create(Teacher $teacher, Branch $branch, Style $style, Customer $customer)
     {
-//        TODO Переделать! что бы вся информация бралась с группы
 
         $teachers_list = $teacher->getSelectList();
         $branches_list = $branch->getSelectList();
@@ -89,7 +131,9 @@ class GroupController extends Controller
      * ===================================================================
      * ===================================================================
      * ==== $branch->all() - когда вызывается модель  ====================
-     * ==== $group->branch->get() - когда вызывается связанная модель ====
+     * ==== foreach ($group->all() as $teachers) {    ====================
+     * ====     dump($teachers->teacher);             ====================
+     * ==== } - когда нужно обратиться к BelongsTo model  ================
      * ===================================================================
      * ===================================================================
      */

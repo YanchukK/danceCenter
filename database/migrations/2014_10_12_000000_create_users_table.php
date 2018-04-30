@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('middleware')->default(2); // 2 - teachers
+            $table->string('middleware')->default('1a'); // null - admin, 2t - teacher, 3c - customer
             $table->rememberToken();
             $table->timestamps();
         });

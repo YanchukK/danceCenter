@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\Http\Requests\TeacherRequest;
 use App\Teacher;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
@@ -40,6 +43,13 @@ class TeacherController extends Controller
      */
     public function store(TeacherRequest $request, Teacher $teacher)
     {
+        User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'middleware' => '2t'
+        ]);
+
         $teacher
             ->create($request->all())
             ->save();
@@ -82,6 +92,12 @@ class TeacherController extends Controller
     public function update(TeacherRequest $request, Teacher $teacher)
     {
         $teacher->update($request->all());
+
+        if(Auth::user()->middleware == '2t') {
+            $id = $teacher->where('email', Auth::user()->email)->first()->id;
+
+            return redirect()->route('teacher.show', ['id' => $id]);
+        }
 
         return redirect()->route('teacher.index');
     }

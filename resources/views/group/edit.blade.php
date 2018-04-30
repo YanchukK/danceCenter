@@ -20,7 +20,7 @@
         {{--@endif--}}
         {{--        {!! Form::open(['route' => 'branch.store']) !!}--}}
         {{--        {{dd($branches)}}--}}
-        {!! Form::model($groups, ['route' => ['group.update', $groups->id], 'method' => 'PUT']) !!}
+        {!! Form::model($groups, ['route' => ['group.update', $groups->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
 
         @include('group._form')
 

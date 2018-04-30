@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\Http\Requests\CustomerRequest;
 use App\Traits\ImageTrait;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
@@ -44,6 +47,12 @@ class CustomerController extends Controller
     {
         $requestToUpload = $this->uploadImage($request, $this->path);
 //        dd($requestToUpload);
+        User::create([
+            'name' => $requestToUpload['name'],
+            'email' => $requestToUpload['email'],
+            'password' => Hash::make($requestToUpload['password']),
+            'middleware' => '3c'
+        ]);
         $customer
             ->create($requestToUpload)
             ->save();
@@ -59,7 +68,7 @@ class CustomerController extends Controller
     public function show(Customer $customer)
     {
         $customers = $customer->findOrFail($customer->id);
-
+//        dd($customer->findOrFail($customer->id));
         return view('customer.show', compact('customers'));
     }
 
@@ -85,7 +94,14 @@ class CustomerController extends Controller
      */
     public function update(CustomerRequest $request, Customer $customer)
     {
-        $customer->update($request->all());
+        $requestToUpload = $this->uploadImage($request, $this->path);
+        $customer->update($requestToUpload);
+
+        if(Auth::user()->middleware == '3c') {
+            $id = $customer->where('email', Auth::user()->email)->first()->id;
+
+            return redirect()->route('customer.show', ['id' => $id]);
+        }
 
         return redirect()->route('customer.index');
     }

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class TeacherMiddleware
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -14,15 +14,13 @@ class TeacherMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $role1, $role2)
     {
+        dd($role1 . $role2);
         if(Auth::user()->middleware == '1a') {
             return $next($request);
         }
-
-        if(Auth::user()->middleware !== '2t') {
-            return redirect('/');
-        }
-        return $next($request);
+        dd('df');
+        return redirect('/');
     }
 }

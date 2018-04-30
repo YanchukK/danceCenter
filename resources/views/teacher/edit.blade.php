@@ -19,7 +19,7 @@
         {{--@endif--}}
         {{--        {!! Form::open(['route' => 'branch.store']) !!}--}}
         {{--        {{dd($branches)}}--}}
-        {!! Form::model($teachers, ['route' => ['teacher.update', $teachers->id], 'method' => 'PUT']) !!}
+        {!! Form::model($teachers, ['route' => ['teacher.update', $teachers->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
 
         @include('teacher._form')
 

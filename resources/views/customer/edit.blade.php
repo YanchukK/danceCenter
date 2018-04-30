@@ -19,7 +19,7 @@
         {{--@endif--}}
 {{--        {!! Form::open(['route' => 'branch.store']) !!}--}}
 {{--        {{dd($branches)}}--}}
-        {!! Form::model($customers, ['route' => ['customer.update', $customers->id], 'method' => 'PUT']) !!}
+        {!! Form::model($customers, ['route' => ['customer.update', $customers->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
 
         @include('customer._form')
 

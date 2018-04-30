@@ -16,14 +16,13 @@ trait ImageTrait
     private function uploadImage ($request, $path) {
 
         $recivedImage = $request->file($path.'_img');
-
-        if ( $request->hasFile($path.'_img') ) {
+//        dd($request->file($path.'_img'));
+        if ( $request->hasFile('customer_img') ) {
             $filenameToUpload = $this->prepareImage($recivedImage, $path);
         }
         else {
             $filenameToUpload = 'noimage.jpg';
         }
-
         $requestToUpload = $request->all();
         unset($requestToUpload[$path.'_img']);
         $requestToUpload[$path.'_img'] = $filenameToUpload;
