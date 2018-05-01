@@ -17,7 +17,7 @@
                             {{--                            @foreach ($groups as $model)--}}
                             <div class="rounded-0 card mt-3 w-100 h-25">
                                 <img class="card-img-top h-25"
-                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThcGuG6AcofBxB5bJHdyv__3BSU7_m9FDB_-gZby54l3VWSG7R"
+                                     src="/storage/img/group/{{$groups->group_img}}"
                                      alt="Card image cap">
                                 <div class="card-body">
                                     {{--                                        {{dd($groups)}}--}}
@@ -27,6 +27,7 @@
                                         <p>{{$groups->style->title}}</p>
                                         <p>{{$groups->branch->title}}</p>
                                         <p>{{$groups->date_time}}</p>
+                                        <h2>{{$groups->notice()->first()->body}}</h2>
                                     </div>
                                     <table class="table">
                                         <thead>
@@ -38,12 +39,12 @@
                                         </thead>
                                         <tbody>
                                         @foreach($groups->customers as $model)
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>{{$model->name}}</td>
-                                            <td>{{$model->l_name}}</td>
-                                        </tr>
-                                            @endforeach
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>{{$model->name}}</td>
+                                                <td>{{$model->l_name}}</td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                     <div class="d-flex flex-sm-row flex-xs-column justify-content-center">

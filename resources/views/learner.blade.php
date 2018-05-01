@@ -17,7 +17,7 @@
                         {{ link_to_route('group.index', 'Manage groups', null, ['class' => 'btn btn-info btn-lg btn-block']) }}
                         {{--                        {{ link_to_route('teacher.index', 'Manage teachers', null, ['class' => 'btn btn-info btn-lg btn-block']) }}--}}
                         {{ link_to_route('customer.show', 'Manage account', $customerId, ['class' => 'btn btn-info btn-lg btn-block']) }}
-                        {{--                        {{ link_to_route('style.index', 'Manage styles', null, ['class' => 'btn btn-info btn-lg btn-block']) }}--}}
+                        {{ link_to_route('notice.index', 'Manage notices', null, ['class' => 'btn btn-info btn-lg btn-block']) }}
                     </div>
                 </div>
             </div>

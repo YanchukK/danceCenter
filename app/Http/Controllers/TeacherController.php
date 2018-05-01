@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\Http\Requests\TeacherRequest;
 use App\Teacher;
+use App\Traits\ImageTrait;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,9 @@ use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
+    use ImageTrait;
+
+    public $path = 'teacher';
     /**
      * Display a listing of the resource.
      *
@@ -43,6 +47,12 @@ class TeacherController extends Controller
      */
     public function store(TeacherRequest $request, Teacher $teacher)
     {
+        $requestToUpload = $this->uploadImage($request, $this->path);
+
+        $teacher
+            ->create($requestToUpload)
+            ->save();
+
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -50,9 +60,6 @@ class TeacherController extends Controller
             'middleware' => '2t'
         ]);
 
-        $teacher
-            ->create($request->all())
-            ->save();
         return redirect()->route('teacher.index');
     }
 
@@ -91,7 +98,11 @@ class TeacherController extends Controller
      */
     public function update(TeacherRequest $request, Teacher $teacher)
     {
-        $teacher->update($request->all());
+        //        TODO реализовать удалиение проапдейченных изображений
+
+        $requestToUpload = $this->uploadImage($request, $this->path);
+
+        $teacher->update($requestToUpload);
 
         if(Auth::user()->middleware == '2t') {
             $id = $teacher->where('email', Auth::user()->email)->first()->id;
@@ -110,6 +121,8 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
+        $this->deleteImage($teacher->teacher_img, $this->path);
+
         $teacher->delete();
 
         return redirect()->route('teacher.index');

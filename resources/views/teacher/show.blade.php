@@ -17,7 +17,7 @@
                             {{--                            @foreach ($groups as $model)--}}
                             <div class="rounded-0 card mt-3 w-100 h-25">
                                 <img class="card-img-top h-25"
-                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThcGuG6AcofBxB5bJHdyv__3BSU7_m9FDB_-gZby54l3VWSG7R"
+                                     src="/storage/img/teacher/{{$teachers->teacher_img}}"
                                      alt="Card image cap">
                                 <div class="card-body">
                                     {{--                                        {{dd($groups)}}--}}

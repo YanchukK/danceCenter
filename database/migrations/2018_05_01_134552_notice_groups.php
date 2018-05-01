@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStylesTable extends Migration
+class NoticeGroups extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateStylesTable extends Migration
      */
     public function up()
     {
-        Schema::create('styles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title');
-            $table->string('style_img');
-            $table->timestamps();
+        Schema::table('groups', function (Blueprint $table) {
+            $table->integer('notice_id')->unsigned()->nullable();
+            $table->foreign('notice_id')->references('id')->on('notices');
         });
     }
 
@@ -28,6 +26,6 @@ class CreateStylesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('styles');
+        Schema::dropIfExists('groups');
     }
 }

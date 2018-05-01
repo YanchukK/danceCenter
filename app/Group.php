@@ -2,11 +2,13 @@
 
 namespace App;
 
+use App\Traits\Selectable;
 use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    protected $fillable = ['title', 'date_time', 'teacher_id', 'style_id', 'branch_id'];
+    use Selectable;
+    protected $fillable = ['title', 'date_time', 'teacher_id', 'style_id', 'branch_id', 'notice', 'group_img'];
 
     public function teacher  () {
        return $this->belongsTo(Teacher::class);
@@ -18,6 +20,10 @@ class Group extends Model
 
     public function style  () {
         return $this->belongsTo(Style::class);
+    }
+
+    public function notice  () {
+        return $this->belongsTo(Notice::class);
     }
 
     public function customers () {

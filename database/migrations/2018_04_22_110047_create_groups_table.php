@@ -17,8 +17,9 @@ class CreateGroupsTable extends Migration
 //            $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->text('title')->nullable();
-            $table->text('date_time')->nullable();
+            $table->string('title')->nullable();
+            $table->string('date_time')->nullable();
+            $table->string('group_img');
             $table->timestamps();
         });
 

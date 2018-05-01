@@ -90,7 +90,7 @@ class BranchController extends Controller
      */
     public function update(BranchRequest $request, Branch $branch)
     {
-//        TODO Придумать удалиение проапдейченных изображений
+//        TODO реализовать удалиение проапдейченных изображений
         $requestToUpload = $this->uploadImage($request, $this->path);
 
         $branch->update($requestToUpload);

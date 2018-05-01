@@ -3,7 +3,7 @@
 @section('panel')
     <div class="panel-heading container-fluid">
         <div class="form-group">
-            <div class="centered-child col-md-11 col-sm-10 col-xs-10"><b>New style</b></div>
+            <div class="centered-child col-md-11 col-sm-10 col-xs-10"><b>New notice</b></div>
         </div>
     </div>
 
@@ -18,10 +18,10 @@
         {{--</div>--}}
         {{--@endif--}}
 {{--        {!! Form::open(['route' => 'branch.store']) !!}--}}
-{{--        {{dd($branches)}}--}}
-        {!! Form::model($styles, ['route' => ['style.update', $styles->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
+{{--        {{dd($branches)}}--}}style
+        {!! Form::model($notices, ['route' => ['notice.update', $notices->id], 'method' => 'PUT']) !!}
 
-        @include('style._form')
+        @include('notice._form')
 
         <div class="form-group">
             {!! Form::button('Update', ['type' => 'submit', 'class' => 'btn btn-block btn-lg btn-outline-success']) !!}

@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StyleRequest;
 use App\Style;
+use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 
 class StyleController extends Controller
 {
+    use ImageTrait;
+    public $path = 'style';
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +19,7 @@ class StyleController extends Controller
     public function index(Style $style)
     {
         $styles = $style->all();
-//        dd($branches->all());
+
         return view('style.index', compact('styles'));
     }
 
@@ -38,8 +41,10 @@ class StyleController extends Controller
      */
     public function store(StyleRequest $request, Style $style)
     {
+        $requestToUpload = $this->uploadImage($request, $this->path);
+
         $style
-            ->create($request->all())
+            ->create($requestToUpload)
             ->save();
         return redirect()->route('style.index');
     }
@@ -79,7 +84,9 @@ class StyleController extends Controller
      */
     public function update(Request $request, Style $style)
     {
-        $style->update($request->all());
+        $requestToUpload = $this->uploadImage($request, $this->path);
+
+        $style->update($requestToUpload);
 
         return redirect()->route('style.index');
     }
@@ -92,6 +99,8 @@ class StyleController extends Controller
      */
     public function destroy(Style $style)
     {
+        $this->deleteImage($style->style_img, $this->path);
+
         $style->delete();
 
         return redirect()->route('style.index');

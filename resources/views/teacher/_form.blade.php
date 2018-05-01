@@ -11,5 +11,8 @@
     <br>
     {!!Form::text('p_number', null, ['class' => 'form-control', 'placeholder' => 'Phone number']) !!}
     <br>
+    <div class="form-group">
+        {{Form::file('teacher_img')}}
+    </div>
     <p></p>
 </div>

@@ -5,12 +5,11 @@ namespace App;
 use App\Traits\Selectable;
 use Illuminate\Database\Eloquent\Model;
 
-class Style extends Model
+class Notice extends Model
 {
-    use Selectable;
-    protected $fillable = ['title', 'style_img'];
+    protected $fillable = ['body'];
 
-    public function groups  () {
+    public function group() {
         return $this->hasMany(Group::class);
     }
 }

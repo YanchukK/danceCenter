@@ -9,7 +9,7 @@ class Teacher extends Model
 {
     use Selectable;
 
-    protected $fillable = ['login', 'password', 'name', 'l_name', 'email', 'p_number'];
+    protected $fillable = ['login', 'password', 'name', 'l_name', 'email', 'p_number', 'teacher_img'];
 
     public function groups () {
         return $this->hasMany(Group::class);

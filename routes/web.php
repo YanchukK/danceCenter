@@ -21,6 +21,7 @@ Route::get('/branches', 'MainController@branches')->name('main_branches');
 Route::group(['middleware' => ['checkRole:1a']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('branch', 'BranchController');
+    Route::resource('notice', 'NoticeController');
     Route::resource('group', 'GroupController');
     Route::resource('teacher', 'TeacherController');
     Route::resource('customer', 'CustomerController');
@@ -39,6 +40,7 @@ Route::group(['middleware' => ['checkRole:1a,2t']], function () {
     Route::resource('teacher', 'TeacherController')->only([
         'show', 'edit', 'update'
     ]);
+    Route::resource('notice', 'NoticeController');
 });
 
 Route::group(['middleware' => ['checkRole:1a,3c,2t']], function () {

@@ -8,11 +8,17 @@ use App\Group;
 use App\Http\Requests\GroupRequest;
 use App\Style;
 use App\Teacher;
+use App\Traits\GroupsForOneCustomer;
+use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
+    use GroupsForOneCustomer, ImageTrait;
+
+    public $path = 'group';
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +26,6 @@ class GroupController extends Controller
      */
     public function index(Group $group, Customer $customer)
     {
-//        dd($group->all());
         if (Auth::user()->middleware == '2t') {
 
             foreach ($group->all() as $groupsTo) {
@@ -33,40 +38,15 @@ class GroupController extends Controller
         }
 
         if (Auth::user()->middleware == '3c') {
+
             $email = Auth::user()->email;
-
-            foreach ($group->all() as $groupItems) { // SEARCH CURRENT CUSTOMER ID
-
-                if ($groupItems->customers->where('email', $email)) {
-                    $customerId = $groupItems->customers->where('email', $email)->first()->id; // todo maybe must be array
-                    break;
-                }
-            }
-
-            foreach ($group->all() as $groupItems) {
-                $pivots[] = $groupItems->customers->first()->pivot;
-            }
-            //todo Найти пользователей с пивот айди
-            //todo написать метод для вывода пользователей без форИч
-            //todo Возможно создать колонку в юзерах з кастомер айди или тичер айди, скорее всего нужно создать, лучше создать отдельный метод
-
-            foreach ($pivots as $pivot) {  // SEARCH GROUPS with CUSTOMERS ids
-                if ($customerId == $pivot->customer_id) {
-                    $groupsArray[] = $group->where('id', $pivot->group_id)->get();
-                }
-            }
-
-            foreach ($groupsArray as $groups) { // collection in collection TO collection
-//                dump($group->first());
-                $groupsToCollect[] = $groups->first();
-            }
-            $groups = collect($groupsToCollect);
+            $groups = $this->customerGroups($group, $email);
 
             return view('group.index', compact('groups'));
         }
 
         $groups = $group->all();
-        dd($groups);
+
         return view('group.index', compact('groups'));
     }
 
@@ -101,9 +81,10 @@ class GroupController extends Controller
      */
     public function store(GroupRequest $request, Group $group)
     {
+        $requestToUpload = array_except($this->uploadImage($request, $this->path), ['customer_id']);
 
         $group
-            ->create($request->except('customer_id'))
+            ->create($requestToUpload)
             ->customers()
             ->sync($request->customer_id);
 
@@ -163,7 +144,10 @@ class GroupController extends Controller
      */
     public function update(GroupRequest $request, Group $group)
     {
-        $group->update($request->all());
+        $requestToUpload = array_except($this->uploadImage($request, $this->path), ['customer_id']);
+
+        $group->update($requestToUpload);
+        $group->customers()->sync($request->customer_id);
 
         return redirect()->route('group.index');
     }

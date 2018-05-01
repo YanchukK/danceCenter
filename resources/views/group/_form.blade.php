@@ -1,6 +1,8 @@
 <div class="form-group">
     {!!Form::text('title', null, ['class' => 'form-control', 'placeholder' => ' title', 'required']) !!}
     <br>
+    {!!Form::text('notice', null, ['class' => 'form-control', 'placeholder' => ' notice']) !!}
+    <br>
     {!! Form::select(
          'teacher_id',
          $teachers_list,
@@ -29,6 +31,9 @@
          ['class' => 'form-control', 'required', 'multiple']
      ) !!}
     <br>
+    <div class="form-group">
+        {{Form::file('group_img')}}
+    </div>
 
     {!!Form::text('date_time', null, ['class' => 'form-control', 'type' => 'date', 'placeholder' => 'Data&Time of training']) !!}
     <br>
