@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\Notice;
+use App\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NoticeController extends Controller
 {
@@ -13,11 +15,31 @@ class NoticeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+
+    }
+
     public function index(Notice $notice)
     {
-        $notices = $notice->all();
+        $email = Auth::user()->email;
+        $groupsBelongsToCurrentTeacher = Teacher::where('email', $email)->first()->groups;
+//        dd($groupsBelongsToCurrentTeacher->count());
+        // WRITE Single METHOD
+        if($groupsBelongsToCurrentTeacher->count() > 0) {
+            foreach ($groupsBelongsToCurrentTeacher as $item) {
+                if(empty($item->notice_id)) {
+                    return redirect()->route('master');
+                }
+            }
+            $notices = $notice->all();
 
-        return view('notice.index', compact('notices'));
+            return view('notice.index', compact('notices'));
+        }
+        else {
+            return redirect()->route('master');
+        }
+
     }
 
     /**

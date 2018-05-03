@@ -26,23 +26,44 @@ class GroupController extends Controller
      */
     public function index(Group $group, Customer $customer)
     {
+        $email = Auth::user()->email;
+        // Maybe need to add column with native teacher id
         if (Auth::user()->middleware == '2t') {
 
-            foreach ($group->all() as $groupsTo) {
-                $groupsWithTeacher = $groupsTo->teacher->where('email', Auth::user()->email)->get();
+            $teacherId = Teacher::where('email', $email)->first()->id;
+            $groupsBelongsToTeacher = [];
+
+            foreach ($group->all() as $allGroups) {
+                if ($allGroups->teacher_id == $teacherId) {
+                    $groupsBelongsToTeacherArray[] = $allGroups;
+                }
             }
 
-            $groups = $group->where('teacher_id', $groupsWithTeacher->first()->id)->get();
+            if(!empty($groupsBelongsToTeacherArray)) {
+                $groupsBelongsToTeacher = collect($groupsBelongsToTeacherArray);
+            }
 
-            return view('group.index', compact('groups'));
+            if ( !empty($groupsBelongsToTeacher) ) {
+                $groups = $groupsBelongsToTeacher;
+                return view('group.index', compact('groups'));
+            }
+            else {
+                return view('master', compact('teacherId')); // with error -> you haven't any groups
+            }
         }
 
         if (Auth::user()->middleware == '3c') {
+            // можно через связи, а можно через WHERE
+            $customerData = Customer::where('email', $email)->first();
+            $customerId = $customerData->id;
 
-            $email = Auth::user()->email;
-            $groups = $this->customerGroups($group, $email);
+            if ($customerData->groups->count() > 0) {
+                $groups = $this->customerGroups($group, $email);
+                return view('group.index', compact('groups'));
+            } else {
+                return view('learner', compact('customerId')); // with message 'you have't any groups'
+            }
 
-            return view('group.index', compact('groups'));
         }
 
         $groups = $group->all();

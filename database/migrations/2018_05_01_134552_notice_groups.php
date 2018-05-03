@@ -14,6 +14,12 @@ class NoticeGroups extends Migration
     public function up()
     {
         Schema::table('groups', function (Blueprint $table) {
+            $table->integer('teacher_id')->unsigned()->nullable();
+            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->integer('branch_id')->unsigned()->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches');
+            $table->integer('style_id')->unsigned()->nullable();
+            $table->foreign('style_id')->references('id')->on('styles');
             $table->integer('notice_id')->unsigned()->nullable();
             $table->foreign('notice_id')->references('id')->on('notices');
         });
@@ -26,6 +32,8 @@ class NoticeGroups extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('groups');
+        Schema::table('groups', function (Blueprint $table) {
+            Schema::dropIfExists('groups');
+        });
     }
 }

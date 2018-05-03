@@ -15,7 +15,6 @@ class CheckRole
      */
     public function handle($request, Closure $next, $admin = '', $customer = '', $teacher = '')
     {
-
         $check = $request->user()->middleware;
         if ($check == $admin || $check == $customer || $check == $teacher) {
             return $next($request);

@@ -16,7 +16,7 @@
                             @if(Illuminate\Support\Facades\Auth::user()->middleware == '1a')
                                 {{ link_to_route('group.create', 'Create group', null, ['class' => 'rounded-0 btn btn-outline-info btn-lg btn-block']) }}
                             @endIf
-{{--                            {{dd($groups)}}--}}
+{{--                            {{dd($groups->last()->notice)}}--}}
                             @foreach ($groups as $model)
                                 <div class="rounded-0 card mt-3" style="width: 22rem;">
                                     <img class="card-img-top"
@@ -25,6 +25,11 @@
                                     <div class="card-body">
                                         <h4 class="card-title">{{$model->title}}</h4>
                                         <div class="card-text">
+                                            @if($model->notice_id !== NULL)
+                                                <hr>
+                                                <h4>{{$model->notice->body}}</h4>
+                                                <hr>
+                                            @endif
                                             <h6>{{$model->teacher->name}} {{$model->teacher->l_name}}</h6>
                                             <p>{{$model->style->title}}</p>
                                             <p>{{$model->branch->title}}</p>

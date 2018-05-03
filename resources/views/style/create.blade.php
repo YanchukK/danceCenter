@@ -17,7 +17,7 @@
         {{--</ul>--}}
         {{--</div>--}}
         {{--@endif--}}
-        {!! Form::open(['route' => 'style.store']) !!}
+        {!! Form::open(['route' => 'style.store', 'enctype' => 'multipart/form-data']) !!}
 
         @include('style._form')
 

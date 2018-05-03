@@ -123,6 +123,10 @@ class TeacherController extends Controller
     {
         $this->deleteImage($teacher->teacher_img, $this->path);
 
+        // If teacher must be deleted, teacher_id will assign NULL
+        Group::where('teacher_id', $teacher->id)
+            ->update(['teacher_id' => NULL]);
+        // Keep in mind this state!
         $teacher->delete();
 
         return redirect()->route('teacher.index');

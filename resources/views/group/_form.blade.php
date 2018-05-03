@@ -1,8 +1,8 @@
 <div class="form-group">
     {!!Form::text('title', null, ['class' => 'form-control', 'placeholder' => ' title', 'required']) !!}
     <br>
-    {!!Form::text('notice', null, ['class' => 'form-control', 'placeholder' => ' notice']) !!}
-    <br>
+    {{--{!!Form::text('notice', null, ['class' => 'form-control', 'placeholder' => ' notice']) !!}--}}
+    {{--<br>--}}
     {!! Form::select(
          'teacher_id',
          $teachers_list,

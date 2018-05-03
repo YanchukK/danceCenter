@@ -42,7 +42,6 @@ class StyleController extends Controller
     public function store(StyleRequest $request, Style $style)
     {
         $requestToUpload = $this->uploadImage($request, $this->path);
-
         $style
             ->create($requestToUpload)
             ->save();

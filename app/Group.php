@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends Model
 {
     use Selectable;
-    protected $fillable = ['title', 'date_time', 'teacher_id', 'style_id', 'branch_id', 'notice', 'group_img'];
+    protected $fillable = ['title', 'date_time', 'teacher_id', 'style_id', 'branch_id', 'notice_id', 'group_img'];
 
     public function teacher  () {
        return $this->belongsTo(Teacher::class);
