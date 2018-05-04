@@ -44,7 +44,9 @@ class HomeController extends Controller
         $email = Auth::user()->email;
 
         foreach ($group->all() as $groupItems) {
-            $teacherId = $groupItems->teacher->where('email', $email)->first()->id;
+            if( !empty($groupItems->teacher->id) ) {
+                $teacherId = $groupItems->teacher->where('email', $email)->first()->id;
+            }
         }
 
         return view('master', compact('teacherId'));

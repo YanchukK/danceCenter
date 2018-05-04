@@ -53,11 +53,14 @@ class TeacherController extends Controller
             ->create($requestToUpload)
             ->save();
 
+        $nativeTeachersId = $teacher->get()->last()->id;
+
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'middleware' => '2t'
+            'middleware' => '2t',
+            'native_teacher_id' => $nativeTeachersId
         ]);
 
         return redirect()->route('teacher.index');

@@ -46,16 +46,21 @@ class CustomerController extends Controller
     public function store(CustomerRequest $request, Customer $customer)
     {
         $requestToUpload = $this->uploadImage($request, $this->path);
-//        dd($requestToUpload);
+
+        $customer
+            ->create($requestToUpload)
+            ->save();
+
+        $nativeCustomersId = $customer->get()->last()->id;
+
         User::create([
             'name' => $requestToUpload['name'],
             'email' => $requestToUpload['email'],
             'password' => Hash::make($requestToUpload['password']),
-            'middleware' => '3c'
+            'middleware' => '3c',
+            'native_customer_id' => $nativeCustomersId
         ]);
-        $customer
-            ->create($requestToUpload)
-            ->save();
+
         return redirect()->route('customer.index');
     }
 

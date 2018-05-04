@@ -10,12 +10,13 @@ use App\Style;
 use App\Teacher;
 use App\Traits\GroupsForOneCustomer;
 use App\Traits\ImageTrait;
+use App\Traits\TeacherOwned;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
-    use GroupsForOneCustomer, ImageTrait;
+    use GroupsForOneCustomer, ImageTrait, TeacherOwned;
 
     public $path = 'group';
 
@@ -26,45 +27,34 @@ class GroupController extends Controller
      */
     public function index(Group $group, Customer $customer)
     {
-        $email = Auth::user()->email;
         // Maybe need to add column with native teacher id
         if (Auth::user()->middleware == '2t') {
+            // Если у учителя нет групп, то редирект на главную страницу
+            $teacherId = Auth::user()->native_teacher_id;
+            $teacherOwnedGroups = $this->teacherOwnedGroups($group, $teacherId);
 
-            $teacherId = Teacher::where('email', $email)->first()->id;
-            $groupsBelongsToTeacher = [];
-
-            foreach ($group->all() as $allGroups) {
-                if ($allGroups->teacher_id == $teacherId) {
-                    $groupsBelongsToTeacherArray[] = $allGroups;
-                }
-            }
-
-            if(!empty($groupsBelongsToTeacherArray)) {
-                $groupsBelongsToTeacher = collect($groupsBelongsToTeacherArray);
-            }
-
-            if ( !empty($groupsBelongsToTeacher) ) {
-                $groups = $groupsBelongsToTeacher;
-                return view('group.index', compact('groups'));
-            }
-            else {
+            if($teacherOwnedGroups->count() < 1) {
                 return view('master', compact('teacherId')); // with error -> you haven't any groups
             }
-        }
+            $groups = $teacherOwnedGroups->get();
 
-        if (Auth::user()->middleware == '3c') {
-            // можно через связи, а можно через WHERE
-            $customerData = Customer::where('email', $email)->first();
-            $customerId = $customerData->id;
-
-            if ($customerData->groups->count() > 0) {
-                $groups = $this->customerGroups($group, $email);
-                return view('group.index', compact('groups'));
-            } else {
-                return view('learner', compact('customerId')); // with message 'you have't any groups'
-            }
+            return view('group.index', compact('groups'));
 
         }
+
+//        if (Auth::user()->middleware == '3c') {
+//            // можно через связи, а можно через WHERE
+//            $customerData = Customer::where('email', $email)->first();
+//            $customerId = $customerData->id;
+//
+//            if ($customerData->groups->count() > 0) {
+//                $groups = $this->customerGroups($group, $email);
+//                return view('group.index', compact('groups'));
+//            } else {
+//                return view('learner', compact('customerId')); // with message 'you have't any groups'
+//            }
+//
+//        }
 
         $groups = $group->all();
 

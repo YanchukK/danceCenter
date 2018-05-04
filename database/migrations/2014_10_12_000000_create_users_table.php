@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('middleware')->default('1a'); // null - admin, 2t - teacher, 3c - customer
+            $table->integer('native_teacher_id')->nullable();
+            $table->integer('native_customer_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
