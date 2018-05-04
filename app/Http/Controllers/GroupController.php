@@ -27,9 +27,8 @@ class GroupController extends Controller
      */
     public function index(Group $group, Customer $customer)
     {
-        // Maybe need to add column with native teacher id
         if (Auth::user()->middleware == '2t') {
-            // Если у учителя нет групп, то редирект на главную страницу
+
             $teacherId = Auth::user()->native_teacher_id;
             $teacherOwnedGroups = $this->teacherOwnedGroups($group, $teacherId);
 
@@ -68,6 +67,7 @@ class GroupController extends Controller
      */
     public function create(Teacher $teacher, Branch $branch, Style $style, Customer $customer)
     {
+
 
         $teachers_list = $teacher->getSelectList();
         $branches_list = $branch->getSelectList();

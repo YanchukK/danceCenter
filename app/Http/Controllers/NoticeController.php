@@ -99,10 +99,8 @@ class NoticeController extends Controller
         }
 
         $notices = $notice->findOrFail($notice->id);
-        //Сначала делаем array_wrap - конвертирует строку в елемент массива с числовым ключем, потом добавляем в коллекцию
-        // TODO Use array_pluck
-        dd(array_wrap($groupBelongsToNoticeAndCurrentTeacher));
-        $groups_list = collect(array_wrap($groupBelongsToNoticeAndCurrentTeacher))->getList();
+        // array_wrap - конвертирует строку в елемент массива с числовым ключем, потом добавляем в коллекцию
+        $groups_list = collect(array_wrap($groupBelongsToNoticeAndCurrentTeacher))->pluck('title', 'id');
 
         return view('notice.edit', compact('notices', 'groups_list'));
     }
