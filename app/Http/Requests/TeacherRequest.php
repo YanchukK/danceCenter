@@ -24,7 +24,12 @@ class TeacherRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'teacher_img' => 'image:jpg,png|max:50000',
+            'name' => 'max:100|required',
+            'password' => 'max:100|required',
+            'l_name' => 'max:100|required',
+            'email' => 'email|required',
+            'p_number' => 'digits_between:9,20|required'
         ];
     }
 }

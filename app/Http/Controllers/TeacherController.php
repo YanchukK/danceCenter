@@ -87,6 +87,7 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
+        $this->deleteImage($teacher->findOrFail($teacher->id)->teacher_img, $this->path);
         $teachers = $teacher->findOrFail($teacher->id);
 
         return view('teacher.edit', compact('teachers'));
@@ -101,8 +102,6 @@ class TeacherController extends Controller
      */
     public function update(TeacherRequest $request, Teacher $teacher)
     {
-        //        TODO реализовать удалиение проапдейченных изображений
-
         $requestToUpload = $this->uploadImage($request, $this->path);
 
         $teacher->update($requestToUpload);

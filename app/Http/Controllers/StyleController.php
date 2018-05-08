@@ -69,6 +69,7 @@ class StyleController extends Controller
      */
     public function edit(Style $style)
     {
+        $this->deleteImage($style->findOrFail($style->id)->style_img, $this->path);
         $styles = $style->findOrFail($style->id);
 
         return view('style.edit', compact('styles'));

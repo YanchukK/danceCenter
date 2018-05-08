@@ -24,7 +24,8 @@ class GroupRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'group_img' => 'image:jpg,png|max:50000'
+//            'date_time' => ''
         ];
     }
 }

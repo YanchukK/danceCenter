@@ -24,7 +24,8 @@ class StyleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'style_img' => 'image:jpg,png|max:50000',
+            'title' => 'max:100|required',
         ];
     }
 }

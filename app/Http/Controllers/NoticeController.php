@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Http\Requests\NoticeRequest;
 use App\Notice;
 use App\Teacher;
 use App\Traits\Selectable;
@@ -54,7 +55,7 @@ class NoticeController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Notice $notice)
+    public function store(NoticeRequest $request, Notice $notice)
     {
         $notice
             ->create($request->except('group_id'))
@@ -112,7 +113,7 @@ class NoticeController extends Controller
      * @param  \App\Notice $notice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Notice $notice)
+    public function update(NoticeRequest $request, Notice $notice)
     {
         // на всякий случай =)
         $groupBelongsToNoticeAndCurrentTeacher = Group::where('teacher_id', Auth::user()->native_teacher_id)->first();

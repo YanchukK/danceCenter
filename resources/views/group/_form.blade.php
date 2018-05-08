@@ -1,3 +1,12 @@
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="form-group">
     {!!Form::text('title', null, ['class' => 'form-control', 'placeholder' => ' title', 'required']) !!}
     <br>
@@ -35,7 +44,7 @@
         {{Form::file('group_img')}}
     </div>
 
-    {!!Form::text('date_time', null, ['class' => 'form-control', 'type' => 'date', 'placeholder' => 'Data&Time of training']) !!}
+    {!!Form::date('date_time', null, ['class' => 'form-control', 'placeholder' => 'Data&Time of training']) !!}
     <br>
     <p></p>
 </div>

@@ -25,14 +25,14 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Group $group, Customer $customer)
+    public function index(Group $group)
     {
-        if (Auth::user()->middleware == '2t') {
+        if ( Auth::user()->middleware == '2t' ) {
 
             $teacherId = Auth::user()->native_teacher_id;
             $teacherOwnedGroups = $this->teacherOwnedGroups($group, $teacherId);
 
-            if($teacherOwnedGroups->count() < 1) {
+            if ( $teacherOwnedGroups->count() < 1 ) {
                 return view('master', compact('teacherId')); // with error -> you haven't any groups
             }
             $groups = $teacherOwnedGroups->get();
@@ -41,19 +41,13 @@ class GroupController extends Controller
 
         }
 
-//        if (Auth::user()->middleware == '3c') {
-//            // можно через связи, а можно через WHERE
-//            $customerData = Customer::where('email', $email)->first();
-//            $customerId = $customerData->id;
-//
-//            if ($customerData->groups->count() > 0) {
-//                $groups = $this->customerGroups($group, $email);
-//                return view('group.index', compact('groups'));
-//            } else {
-//                return view('learner', compact('customerId')); // with message 'you have't any groups'
-//            }
-//
-//        }
+        if (Auth::user()->middleware == '3c') {
+
+            $currentCustomerGroups = Customer::where('id', Auth::user()->native_customer_id)->first()->groups;
+            $groups = $currentCustomerGroups;
+
+            return view('group.index', compact('groups'));
+        }
 
         $groups = $group->all();
 
@@ -67,8 +61,6 @@ class GroupController extends Controller
      */
     public function create(Teacher $teacher, Branch $branch, Style $style, Customer $customer)
     {
-
-
         $teachers_list = $teacher->getSelectList();
         $branches_list = $branch->getSelectList();
         $styles_list = $style->getSelectList('title');
@@ -110,9 +102,32 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
+
+        if ( Auth::user()->middleware == '2t' ) {
+
+            $currentTeacherGroups = $group->where('teacher_id', Auth::user()->native_teacher_id)->get();
+            $groups = $currentTeacherGroups->find($group->id);
+
+            if (empty($groups)) {
+                return $this->index($group);
+            }
+            return view('group.show', compact('groups'));
+        }
+
+        if ( Auth::user()->middleware == '3c' ) {
+
+            $currentCustomerGroups = Customer::where('id', Auth::user()->native_customer_id)->first()->groups;
+            $groups = $currentCustomerGroups->find($group->id);
+
+            if (empty($groups)) {
+                return $this->index($group); // with errors
+            }
+            return view('group.show', compact('groups'));
+        }
+
         $groups = $group->findOrFail($group->id);
 
-        return view('group.show', compact('groups'));
+        return view('group.index', compact('groups'));
     }
 
     /**
@@ -131,12 +146,17 @@ class GroupController extends Controller
      */
     public function edit(Group $group, Branch $branch, Teacher $teacher, Customer $customer, Style $style)
     {
+        /**
+         * Так после Update записи, старое изображение не сохраняется, мы его удаляем из Storage
+         */
+        $this->deleteImage($group->findOrFail($group->id)->group_img, $this->path);
+
         $groups = $group->findOrFail($group->id);
         $teachers_list = $teacher->getSelectList();
         $branches_list = $branch->getSelectList();
         $styles_list = $style->getSelectList('title');
         $customers_list = $customer->getSelectList();
-//        dd($groups);
+
         return view('group.edit', compact(
             'teachers_list',
             'branches_list',
@@ -171,6 +191,7 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
+        $this->deleteImage($group->group_img, $this->path);
         $group->delete();
 
         return redirect()->route('group.index');

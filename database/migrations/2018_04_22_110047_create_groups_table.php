@@ -14,8 +14,6 @@ class CreateGroupsTable extends Migration
     public function up()
     {
         Schema::create('groups', function (Blueprint $table) {
-//            $table->engine = 'InnoDB';
-
             $table->increments('id');
             $table->string('title')->nullable();
             $table->string('date_time')->nullable();
@@ -23,10 +21,6 @@ class CreateGroupsTable extends Migration
             $table->timestamps();
         });
 
-//        Schema::table('groups', function ($table) {
-//            $table->integer('teacher_id')->unsigned();
-//            $table->foreign('teacher_id')->references('id')->on('teachers');
-//        });
     }
 
     /**

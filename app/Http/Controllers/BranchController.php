@@ -6,6 +6,7 @@ use App\Branch;
 use App\Http\Requests\BranchRequest;
 use Illuminate\Http\Request;
 use App\Traits\ImageTrait;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
@@ -19,10 +20,15 @@ class BranchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+//    public function __counstruct() {
+//        if(!Auth::check()) {
+//            return view('main.index');
+//        }
+//    }
+
     public function index(Branch $branch)
     {
         $branches = $branch->all();
-//        dd($branches->all());
         return view('branch.index', compact('branches'));
     }
 
@@ -44,7 +50,6 @@ class BranchController extends Controller
      */
     public function store(BranchRequest $request, Branch $branch)
     {
-
         $requestToUpload = $this->uploadImage($request, $this->path);
 
         $branch
@@ -75,9 +80,12 @@ class BranchController extends Controller
      */
     public function edit(Branch $branch)
     {
+        /**
+         * Так после Update записи, старое изображение не сохраняется, мы его удаляем из Storage
+        */
+        $this->deleteImage($branch->findOrFail($branch->id)->branch_img, $this->path);
 
         $branches = $branch->findOrFail($branch->id);
-//        dd($branches);
         return view('branch.edit', compact('branches'));
     }
 
@@ -90,7 +98,6 @@ class BranchController extends Controller
      */
     public function update(BranchRequest $request, Branch $branch)
     {
-//        TODO реализовать удалиение проапдейченных изображений
         $requestToUpload = $this->uploadImage($request, $this->path);
 
         $branch->update($requestToUpload);

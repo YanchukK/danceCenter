@@ -27,7 +27,11 @@
                                         <p>{{$groups->style->title}}</p>
                                         <p>{{$groups->branch->title}}</p>
                                         <p>{{$groups->date_time}}</p>
-                                        <h2>{{$groups->notice()->first()->body}}</h2>
+                                        @if($groups->notice_id !== NULL)
+                                            <hr>
+                                            <h4>{{$groups->notice->body}}</h4>
+                                            <hr>
+                                        @endif
                                     </div>
                                     <table class="table">
                                         <thead>

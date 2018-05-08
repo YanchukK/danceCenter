@@ -85,6 +85,10 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
+        /**
+         * Так после Update записи, старое изображение не сохраняется, мы его удаляем из Storage
+         */
+        $this->deleteImage($customer->findOrFail($customer->id)->customer_img, $this->path);
         $customers = $customer->findOrFail($customer->id);
 
         return view('customer.edit', compact('customers'));
@@ -119,6 +123,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
+        $this->deleteImage($customer->branch_img, $this->path);
         $customer->delete();
 
         return redirect()->route('customer.index');
