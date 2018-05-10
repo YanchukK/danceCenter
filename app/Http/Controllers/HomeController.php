@@ -33,10 +33,6 @@ class HomeController extends Controller
         $email = Auth::user()->email;
         $customerId = Customer::where('email', $email)->first()->id;
 
-//        foreach ($group->all() as $groupItems) {
-//            $customerId = $groupItems->customers->where('email', $email)->first()->id;
-//            break;
-//        }
         return view('learner', compact('customerId'));
     }
 

@@ -16,9 +16,8 @@
                             @if(Illuminate\Support\Facades\Auth::user()->middleware == '1a')
                                 {{ link_to_route('group.create', 'Create group', null, ['class' => 'rounded-0 btn btn-outline-info btn-lg btn-block']) }}
                             @endIf
-{{--                            {{dd($groups->last()->notice)}}--}}
                             @foreach ($groups as $model)
-                                <div class="rounded-0 card mt-3" style="width: 22rem;">
+                                    <div class="rounded-0 card mt-3" style="width: 22rem;">
                                     <img class="card-img-top"
                                          src="/storage/img/group/{{$model->group_img}}"
                                          alt="Card image cap">
@@ -34,6 +33,7 @@
                                             <p>{{$model->style->title}}</p>
                                             <p>{{$model->branch->title}}</p>
                                             <p>{{$model->date_time}}</p>
+                                            <p>Cost of single lesson is ${{$model->price->cost_for_one}} </p>
                                         </div>
                                         <div class="d-flex flex-sm-row flex-xs-column justify-content-center">
                                             {{ link_to_route('group.show', 'View', $model->id, ['class' => 'btn btn-success rounded-0 h-50 px-4']) }}

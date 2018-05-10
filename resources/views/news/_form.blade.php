@@ -12,7 +12,7 @@
     {!!Form::text('desc', null, ['class' => 'form-control', 'placeholder' => ' Description', 'required']) !!}
     <br>
     <div class="form-group">
-        {{Form::file('style_img')}}
+        {{Form::file('news_img')}}
     </div>
     <p></p>
 </div>

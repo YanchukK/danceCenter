@@ -9,9 +9,18 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item m-2">
                     {{ link_to_route('main_branches', 'Branches') }}
+                </li>
+                <li class="nav-item m-2">
+                    {{ link_to_route('main_styles', 'Styles') }}
+                </li>
+                <li class="nav-item m-2">
+                    {{ link_to_route('main_prices', 'Prices') }}
+                </li>
+                <li class="nav-item m-2">
+                    {{ link_to_route('main_teachers', 'Teachers') }}
                 </li>
             </ul>
 

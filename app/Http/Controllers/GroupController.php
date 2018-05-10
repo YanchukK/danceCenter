@@ -6,6 +6,7 @@ use App\Branch;
 use App\Customer;
 use App\Group;
 use App\Http\Requests\GroupRequest;
+use App\Price;
 use App\Style;
 use App\Teacher;
 use App\Traits\GroupsForOneCustomer;
@@ -59,19 +60,21 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Teacher $teacher, Branch $branch, Style $style, Customer $customer)
+    public function create(Teacher $teacher, Branch $branch, Style $style, Customer $customer, Price $price)
     {
         $teachers_list = $teacher->getSelectList();
         $branches_list = $branch->getSelectList();
         $styles_list = $style->getSelectList('title');
         $customers_list = $customer->getSelectList();
+        $prices_list = $price->getSelectList('cost_for_one');
 
         return view('group.create',
             compact(
                 'teachers_list',
                 'branches_list',
                 'styles_list',
-                'customers_list'
+                'customers_list',
+                'prices_list'
             )
         );
     }
@@ -85,7 +88,7 @@ class GroupController extends Controller
     public function store(GroupRequest $request, Group $group)
     {
         $requestToUpload = array_except($this->uploadImage($request, $this->path), ['customer_id']);
-
+//        dd($requestToUpload);
         $group
             ->create($requestToUpload)
             ->customers()
@@ -127,7 +130,7 @@ class GroupController extends Controller
 
         $groups = $group->findOrFail($group->id);
 
-        return view('group.index', compact('groups'));
+        return view('group.show', compact('groups'));
     }
 
     /**
@@ -144,7 +147,7 @@ class GroupController extends Controller
      * ===================================================================
      * ===================================================================
      */
-    public function edit(Group $group, Branch $branch, Teacher $teacher, Customer $customer, Style $style)
+    public function edit(Group $group, Branch $branch, Teacher $teacher, Customer $customer, Style $style, Price $price)
     {
         /**
          * Так после Update записи, старое изображение не сохраняется, мы его удаляем из Storage
@@ -156,13 +159,15 @@ class GroupController extends Controller
         $branches_list = $branch->getSelectList();
         $styles_list = $style->getSelectList('title');
         $customers_list = $customer->getSelectList();
+        $prices_list = $price->getSelectList('cost_for_one');
 
         return view('group.edit', compact(
             'teachers_list',
             'branches_list',
             'styles_list',
             'customers_list',
-            'groups'
+            'groups',
+            'prices_list'
         ));
     }
 

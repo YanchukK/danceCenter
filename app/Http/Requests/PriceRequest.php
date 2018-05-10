@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GroupRequest extends FormRequest
+class PriceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class GroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'group_img' => 'image:jpg,png,jpeg|max:50000'
-//            'date_time' => ''
+            'cost_for_one' => 'max:100'
         ];
     }
 }

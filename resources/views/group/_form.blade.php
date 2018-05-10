@@ -39,6 +39,12 @@
          isset($selected_customers) ? $selected_customers : null,
          ['class' => 'form-control', 'required', 'multiple']
      ) !!}
+    {!! Form::select(
+         'price_id',
+         $prices_list,
+         isset($selected_prices) ? $selected_prices : null,
+         ['class' => 'form-control', 'required']
+     ) !!}
     <br>
     <div class="form-group">
         {{Form::file('group_img')}}

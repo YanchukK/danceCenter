@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/branches', 'MainController@branches')->name('main_branches');
+Route::get('/styles', 'MainController@styles')->name('main_styles');
+Route::get('/prices', 'MainController@prices')->name('main_prices');
+Route::get('/teachers', 'MainController@teachers')->name('main_teachers');
 
 Route::group(['middleware' => ['checkRole:1a']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
@@ -26,6 +29,8 @@ Route::group(['middleware' => ['checkRole:1a']], function () {
     Route::resource('teacher', 'TeacherController');
     Route::resource('customer', 'CustomerController');
     Route::resource('style', 'StyleController');
+    Route::resource('price', 'PriceController');
+    Route::resource('news', 'NewsController');
 });
 
 Route::group(['middleware' => ['checkRole:1a,3c']], function () {

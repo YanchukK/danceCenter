@@ -27,6 +27,7 @@
                                         <p>{{$groups->style->title}}</p>
                                         <p>{{$groups->branch->title}}</p>
                                         <p>{{$groups->date_time}}</p>
+                                        <p>{{$groups->price->cost_for_one}}</p>
                                         @if($groups->notice_id !== NULL)
                                             <hr>
                                             <h4>{{$groups->notice->body}}</h4>
