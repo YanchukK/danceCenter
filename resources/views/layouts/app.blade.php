@@ -27,11 +27,13 @@
 </head>
 <body>
 <div id="app">
-    @if(!empty(Illuminate\Support\Facades\Auth::user()->middleware))
-        {{dump(Illuminate\Support\Facades\Auth::user()->middleware)}}
-    @endif
+    {{--@if(!empty(Illuminate\Support\Facades\Auth::user()->middleware))--}}
+        {{--{{dump(Illuminate\Support\Facades\Auth::user()->middleware)}}--}}
+    {{--@endif--}}
+    @yield('header')
     @include('inc.navbar')
     <main class="py-4">
+{{--        @include('main.index')--}}
         @yield('content')
     </main>
 </div>
