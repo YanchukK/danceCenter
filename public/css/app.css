@@ -2,7 +2,7 @@
  *HELLO SECTION */
 
 .hello-section {
-  height: 80vh;
+  height: 100vh;
   width: 100%;
 }
 
@@ -32,7 +32,7 @@
   line-height: 10vw;
   margin: 0;
   font-weight: 900;
-  padding-top: 8vh;
+  padding-top: 7vh;
   -webkit-transform: scaleY(1.25);
           transform: scaleY(1.25);
   text-shadow: 0px 0px 5px #ffffff;
@@ -45,7 +45,7 @@
 .left-side-hello-s .text-wrapper .top-left-text {
   text-shadow: 1px 1px 2px black;
   font-size: 7vw;
-  line-height: 10vh;
+  line-height: 12vh;
   color: #ffffff;
   font-weight: 800;
   text-transform: uppercase;
@@ -54,7 +54,7 @@
 .left-side-hello-s .text-wrapper .bottom-text-block {
   background-color: #e8e8e8;
   width: 30vw;
-  height: 28vh;
+  height: 31vh;
   -webkit-box-shadow: 0 4px 12px;
           box-shadow: 0 4px 12px;
   position: absolute;
@@ -84,10 +84,10 @@
   width: 10vw;
   height: 5vh;
   font-size: 2vw;
-  line-height: 2vw;
+  line-height: 1vw;
   -ms-flex-item-align: end;
       align-self: flex-end;
-  margin: 2vh 2vw 0 0;
+  margin: 4vh 2vw 0 0;
 }
 
 .left-side-hello-s .text-wrapper .bottom-text-block .start-btn:hover {
@@ -128,9 +128,17 @@
 /**
  *NEWS SLIDER SECTION */
 
-.news-slider-section {
-  height: 100vh;
+.news-slider {
+  height: 90vh;
+  width: 100vw;
   background-color: #b5b9bd;
+}
+
+.news-slider .slider-img {
+  width: 100vw;
+  height: 90vh;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 /**

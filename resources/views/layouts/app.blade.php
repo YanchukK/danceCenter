@@ -30,12 +30,41 @@
     {{--@if(!empty(Illuminate\Support\Facades\Auth::user()->middleware))--}}
         {{--{{dump(Illuminate\Support\Facades\Auth::user()->middleware)}}--}}
     {{--@endif--}}
-    @yield('header')
+    @if(empty(\Request::route()->getName()))
+    <div class="d-inline-flex flex-row hello-section">
+        <div class="left-side-hello-s hello-s-self d-flex">
+            <div class="vertical-text">
+                <p>Lorem!</p>
+            </div>
+            <div class="text-wrapper">
+                <p class="top-left-text">Lorem ipsum.</p>
+                <div class="bottom-text-block">
+                    <p>Do you want start trainign now? Ready?</p>
+                    <button type="button" class="btn btn-outline-dark start-btn">GO!</button>
+                </div>
+            </div>
+        </div>
+        <div class="right-side-hello-s hello-s-self d-flex">
+            <img src="{{asset('img/header/35.jpg')}}" alt="">
+            <div class="logo">
+                <img src="{{asset('img/header/logo.png')}}" alt="">
+            </div>
+        </div>
+    </div>
+    @endif
     @include('inc.navbar')
-    <main class="py-4">
-{{--        @include('main.index')--}}
+    <main>
         @yield('content')
     </main>
 </div>
+{{--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>--}}
+<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+{{--<script>--}}
+    {{--$('.carousel').carousel({--}}
+        {{--ride: 'false'--}}
+    {{--})--}}
+{{--</script>--}}
 </body>
 </html>

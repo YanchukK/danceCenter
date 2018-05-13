@@ -1,23 +1,42 @@
 @extends('layouts.app')
-@section('header')
-    <div class="d-inline-flex flex-row hello-section">
-        <div class="left-side-hello-s hello-s-self d-flex">
-            <div class="vertical-text">
-                <p>Lorem!</p>
-            </div>
-            <div class="text-wrapper">
-                <p class="top-left-text">Lorem ipsum.</p>
-                <div class="bottom-text-block">
-                    <p>Do you whant start trainign no?</p>
-                    <button type="button" class="btn btn-outline-dark start-btn">GO!</button>
-                </div>
+@section('content')
+    <section class="news-slider">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="false">
+            <div class="carousel-inner">
+                {{--todo showing two same img, fix it!--}}
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleSlidesOnly" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleSlidesOnly" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleSlidesOnly" data-slide-to="2"></li>
+                </ol>
+                @foreach($news as $model)
+                    @if($loop->iteration == 1)
+                        <div class="carousel-item active">
+                            <img class="d-block slider-img" src="/storage/img/news/{{$model->news_img}}" alt="First slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>{{$model->title}}</h5>
+                                <p>{{$model->desc}}</p>
+                            </div>
+                        </div>
+                    @elseif($loop->iteration == 2)
+                        <div class="carousel-item">
+                            <img class="d-block slider-img" src="/storage/img/news/{{$model->news_img}}" alt="First slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>{{$model->title}}</h5>
+                                <p>{{$model->desc}}</p>
+                            </div>
+                        </div>
+                    @else
+                        <div class="carousel-item slider-img">
+                            <img class="d-block" src="/storage/img/news/{{$model->news_img}}" alt="First slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>{{$model->title}}</h5>
+                                <p>{{$model->desc}}</p>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
         </div>
-        <div class="right-side-hello-s hello-s-self d-flex">
-            <img src="{{asset('img/header/35.jpg')}}" alt="">
-            <div class="logo">
-                <img src="{{asset('img/header/logo.png')}}" alt="">
-            </div>
-        </div>
-    </div>
+    </section>
 @endsection
