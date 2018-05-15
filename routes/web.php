@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('main.index');
-});
+Route::get('/', 'MainController@index');
 
 Auth::routes();
 Route::get('/branches', 'MainController@branches')->name('main_branches');

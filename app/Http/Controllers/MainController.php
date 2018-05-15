@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Branch;
+use App\News;
 use App\Price;
 use App\Style;
 use App\Teacher;
@@ -10,6 +11,13 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
+    public function index () {
+        $news = News::all();
+        $styles = Style::all();
+
+        return view('main.index', compact('news', 'styles'));
+    }
+
     public function branches(Branch $branch) {
 
         $branches = $branch->all();
@@ -42,7 +50,7 @@ class MainController extends Controller
 
 
 //    public function newsSlider() {
-//        //
+//        return view('main.newsCarousel');
 //    }
 
 //    public function commercialSlider() {

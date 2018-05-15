@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-laravel">
+<nav class="navbar navbar-expand-lg navbar-laravel navbar-custom">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
+        <a class="navbar-brand navbar-logo" href="{{ url('/') }}">
+            {{ config('app.name', 'Humla.') }}
         </a>
         {{--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">--}}
         {{--<span class="navbar-toggler-icon"></span>--}}
@@ -29,7 +29,7 @@
                 <!-- Authentication Links -->
                 {{--<li><a class="btn btn-outline-info" href="{{route('post.create')}}" role="button">Create Post</a></li>--}}
                 @guest
-                    <li><a class="btn btn-outline-success my-2 my-sm-0"
+                    <li><a class="btn my-2 my-sm-0"
                            href="{{ route('login') }}">{{ __('Login') }}</a></li>
                     <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                 @else

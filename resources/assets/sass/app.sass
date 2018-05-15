@@ -47,14 +47,14 @@
     .top-left-text
       text-shadow: 1px 1px 2px black
       font-size: 7vw
-      line-height: 12vh
+      line-height: 14vh
       color: #ffffff
       font-weight: 800
       text-transform: uppercase
     .bottom-text-block
       background-color: #e8e8e8
       width: 30vw
-      height: 31vh
+      height: 15vw
       box-shadow: 0 4px 12px
       position: absolute
       z-index: 999
@@ -63,10 +63,10 @@
       p
         align-self: flex-start
         margin: 4vh 0 0 2vw
-        font-size: 5vh
+        font-size: 2vw
         text-transform: uppercase
         font-weight: 300
-        line-height: 5vh
+        line-height: 2vw
         transform: scaleY(1.25)
       .start-btn
         width: 10vw
@@ -81,7 +81,7 @@
         &:focus
           background-color: #000000
           color: #FFF300
-          box-shadow: 0 0 0 0.2rem rgba(255,255,0,.5)
+          box-shadow: 0 0 0 0.2rem rgba(255, 255, 0, .5)
         &:active
           background-color: #FFF300
           color: #000000
@@ -102,26 +102,119 @@
  *NEWS SLIDER SECTION
 
 .news-slider
-  height: 90vh
-  width: 100vw
-  background-color: #b5b9bd
-  .slider-img
-    width: 100vw
-    height: 90vh
-    object-fit: cover
-
-/**
- *COMMERCIAL SLIDER SECTION
-
-.commercial-slider-section
   height: 100vh
-  background-color: #FFF300
+  background-color: #ffffff
+  .slider-img
+    width: 80vw
+    height: 100vh
+    object-fit: cover
+    padding: 5vh 0 0 2vh
+  .logo-news
+    height: 30vw
+    //width: 10vw
+    position: absolute
+    z-index: 999
+    right: 3vw
+    top: 0
+  .ns-desc
+    background-color: #000000
+    margin: 0 0 0 4vw
+    height: 25vh
+    left: 1vw
+    padding: 0
+    width: 92vw
+    h3
+      text-align: left
+      color: #FFF300
+      font-size: 6vh
+      text-transform: uppercase
+      line-height: 6vh
+      padding: 0 0 0 2vw
+    p
+      text-align: left
+      position: absolute
+      z-index: 999
+      background-color: #e8e8e8
+      font-size: 3vh
+      line-height: 7vh
+      width: 92vw
+      left: 1vw
+      color: #000000
+      box-shadow: 0 4px 12px black
+      padding: 0 0 0 10px
 
 /**
- *STYLES SECTION
-/**
- *BRANCHES SECTION
-/**
- *FEEDBACK SECTION
-/**
- *FOOTER SECTION
+  *NAVBAR
+
+.navbar-custom
+  background-color: #000000
+  .container
+    margin: 0
+    max-width: 95vw
+    .navbar-logo
+      text-transform: uppercase
+      color: #ffffff
+      border: #FFF300 5px solid
+      padding: 5px 10px
+    .navbar-collapse
+      justify-content: space-around
+      li > a
+        color: #ffffff
+        text-transform: uppercase
+
+  /**
+    *STYLES SECTION
+section.styles
+  height: 100vh
+  display: flex
+  flex-direction: row
+  .left-side
+    width: 50vw
+  .right-side
+    background-color: #eaeaea
+    width: 50vw
+    box-shadow: inset 0 0 15px #303030
+    display: flex
+    justify-content: flex-end
+    align-items: center
+    h1
+      writing-mode: tb-rl
+      text-transform: uppercase
+      font-size: 8vw
+      font-weight: 800
+      color: #000000
+      text-shadow: 15px 15px 0 #FFF300
+      margin: 0 2vw 0 0
+  .styles-review
+    position: absolute
+    z-index: 888
+    display: flex
+    height: 70vh
+    width: 90vw
+    margin: 10vh 0 0 2vw
+    .s-board
+      margin: 1vw
+      height: 420px
+      background-color: #FFF300
+      box-shadow: 10px 10px 10px #888686
+      &:nth-child(1)
+        margin-top: -5vh
+      &:nth-child(2)
+        margin-top: 20vh
+      &:nth-child(3)
+        margin-top: 5vh
+        box-shadow: 15px 15px 10px #888686
+        background-color: #000000
+        & > h1
+          color: #ffffff
+      img
+        height: 25vw
+      h1
+        text-align: center
+        padding-top: 1vh
+        font-weight: 600
+        text-transform: uppercase
+
+
+
+
