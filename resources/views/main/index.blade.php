@@ -59,4 +59,61 @@
             <h1>Styles.</h1>
         </div>
     </section>
+    <section class="branches">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                @foreach($branches as $key => $branch)
+                    @if($loop->iteration == 1)
+                        <div class="carousel-item active">
+                            @else
+                                <div class="carousel-item">
+                                    @endif
+                                    <div class="branch-slide">
+                                        <div class="left-side">
+                                            <h1>{{$branch->name}}</h1>
+                                            <div class="img-block">
+                                                <img class="d-block" src="/storage/img/branch/{{$branch->branch_img}}"
+                                                     alt="First slide">
+                                            </div>
+                                        </div>
+                                        <div class="right-side">
+                                            <div class="r-text-block">
+                                                <p class="inner-text">Make branch description in database. Make branch
+                                                    description in database. Make branch description in database</p>
+                                            </div>
+                                            <h6>Some text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
+                                                aut eos
+                                                illo quas quo rem saepe tempora ut veniam, voluptate.</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button"
+                           data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleSlidesOnly" role="button"
+                           data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+            </div>
+    </section>
+    <section class="feedback">
+        <h4>Send your <span>name</span> and <span>email</span> to as, and we invite you to first training for free! </h4>
+        {!! Form::open(['route' => 'customer.store', 'enctype' => 'multipart/form-data']) !!}
+        <div class="form-group feedback-form">
+            {!!Form::text('name', null, ['class' => 'form-control ff-control', 'placeholder' => ' Name', 'required']) !!}
+            <br>
+            {!!Form::text('email', null, ['class' => 'form-control ff-control', 'placeholder' => 'Email']) !!}
+            <br>
+            {!! Form::button('Go!', ['type' => 'submit', 'class' => 'btn btn-primary ff-btn']) !!}
+        </div>
+        {!! Form::close() !!}
+    </section>
+    <footer>
+        ⒸEshkere!
+    </footer>
 @endsection

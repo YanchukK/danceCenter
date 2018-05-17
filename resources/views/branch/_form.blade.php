@@ -8,7 +8,7 @@
     </div>
 @endif
 <div class="form-group">
-    {!!Form::text('title', null, ['class' => 'form-control', 'method' => 'POST', 'placeholder' => ' title', 'required']) !!}
+    {!!Form::text('desc', null, ['class' => 'form-control', 'method' => 'POST', 'placeholder' => 'branch description', 'required']) !!}
     <br>
     {!!Form::text('name', null, ['class' => 'form-control', 'placeholder' => ' name']) !!}
     <br>

@@ -14,8 +14,9 @@ class MainController extends Controller
     public function index () {
         $news = News::all();
         $styles = Style::all();
+        $branches = Branch::all();
 
-        return view('main.index', compact('news', 'styles'));
+        return view('main.index', compact('news', 'styles', 'branches'));
     }
 
     public function branches(Branch $branch) {

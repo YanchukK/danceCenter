@@ -20,9 +20,9 @@
                                          src="/storage/img/branch/{{$model->branch_img}}"
                                          alt="Card image cap">
                                     <div class="card-body">
-                                        <h4 class="card-title">{{$model->title}}</h4>
+                                        <h4 class="card-title">{{$model->name}}</h4>
                                         <div class="card-text">
-                                            <h6>{{$model->name}}</h6>
+                                            <h6>{{$model->desc}}</h6>
                                             <p>{{$model->address}}</p>
                                             <p>{{$model->p_number}}</p>
                                             <p>{{$model->w_hours}}</p>
