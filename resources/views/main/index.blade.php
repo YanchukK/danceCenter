@@ -90,7 +90,7 @@
                         </div>
             </div>
     </section>
-    <section class="feedback">
+    <section class="feedback" id="target">
         <h4>Send your <span>name</span> and <span>email</span> to as, and we invite you to first training for free!
         </h4>
         {!! Form::open(['route' => 'customer.store']) !!}

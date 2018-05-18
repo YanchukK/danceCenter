@@ -40,7 +40,7 @@
                 <p class="top-left-text">Lorem ipsum.</p>
                 <div class="bottom-text-block">
                     <p>Do you want start trainign now? Ready?</p>
-                    <button type="button" class="btn btn-outline-dark start-btn">GO!</button>
+                    <a class="btn btn-outline-dark start-btn" href="#target">GO!</a>
                 </div>
             </div>
         </div>

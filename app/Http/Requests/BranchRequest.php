@@ -25,7 +25,7 @@ class BranchRequest extends FormRequest
     {
         return [
             'branch_img' => 'image:jpg,png|max:50000',
-            'title' => 'max:300|required',
+            'desc' => 'max:400|required',
             'address' => 'max:100|required',
             'p_number' => 'digits_between:9,20|required',
             'w_hours' => 'max:300|required'

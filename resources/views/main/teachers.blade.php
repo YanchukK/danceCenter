@@ -6,8 +6,8 @@
     </div>
     <div class="d-flex justify-content-center flex-sm-column flex-md-row flex-wrap">
         @foreach ($teachers as $model)
-            <div class="card m-3 order-{{$loop->count}}" style="width: 20rem;">
-                <img class="card-img-top"
+            <div class="card m-3 order-{{$loop->count}} d-flex flex-md-row" style="width: 90vw;">
+                <img class="card-img-top w-25 h-100"
                      src="/storage/img/teacher/{{$model->teacher_img}}"
                      alt="Card image cap">
                 <div class="card-body">
