@@ -24,13 +24,13 @@ class CustomerRequest extends FormRequest
     public function rules()
     {
         return [
-            'customer_img' => 'image:jpg,png|max:50000',
+//            'customer_img' => 'image:jpg,png|max:50000',
             'name' => 'max:100|required',
-            'l_name' => 'max:100|required',
+//            'l_name' => 'max:100|required',
             'email' => 'max:100|required|email',
-            'login' => 'max:100|required',
-            'password' => 'max:100|required',
-            'p_number' => 'digits_between:9,20|required',
+//            'login' => 'max:100|required',
+//            'password' => 'max:100|required',
+//            'p_number' => 'digits_between:9,20|required',
         ];
     }
 }

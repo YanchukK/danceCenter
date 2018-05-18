@@ -8,10 +8,12 @@ use App\Price;
 use App\Style;
 use App\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
     public function index () {
+
         $news = News::all();
         $styles = Style::all();
         $branches = Branch::all();

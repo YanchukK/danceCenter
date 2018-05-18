@@ -13,8 +13,18 @@
                     {{--@endif--}}
                     <div class="panel-body">
                         <div class="d-flex justify-content-between flex-sm-column flex-md-row flex-wrap">
+                            @foreach ($new_customers as $model)
+                                <div class="rounded-0 card mt-3 mb-3" style="width: 90vw">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{$model->name}}</h4>
+                                        <div class="card-text">
+                                            <h6>{{$model->email}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                             {{ link_to_route('customer.create', 'Create customer', null, ['class' => 'rounded-0 btn btn-outline-info btn-lg btn-block']) }}
-                            @foreach ($customers as $model)
+                            @foreach ($regular_customers as $model)
                                 <div class="rounded-0 card mt-3" style="width: 22rem;">
                                     <img class="card-img-top"
                                          src="/storage/img/customer/{{$model->customer_img}}"

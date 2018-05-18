@@ -51,3 +51,9 @@ Route::group(['middleware' => ['checkRole:1a,3c,2t']], function () {
         'index', 'show'
     ]);
 });
+Route::group(['middleware' => ['checkRole:1a,guest']], function () {
+    Route::resource('customer', 'CustomerController')->only([
+        'store'
+    ]);
+});
+
