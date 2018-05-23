@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Branch;
+use App\Customer;
+use App\Group;
 use App\News;
 use App\Price;
 use App\Style;
@@ -12,13 +14,33 @@ use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
-    public function index () {
+    public function index (Group $group) {
 
         $news = News::all();
         $styles = Style::all();
         $branches = Branch::all();
 
-        return view('main.index', compact('news', 'styles', 'branches'));
+        if(Auth::check()) {
+            if(Auth::user()->middleware == '3c') {
+                $email = Auth::user()->email;
+                $customerId = Customer::where('email', $email)->first()->id;
+                return view('main.index', compact('news', 'styles', 'branches', 'customerId'));
+            }
+
+            if(Auth::user()->middleware == '2t'){
+                $email = Auth::user()->email;
+
+                foreach ($group->all() as $groupItems) {
+                    if( !empty($groupItems->teacher->id) ) {
+                        $teacherId = $groupItems->teacher->where('email', $email)->first()->id;
+                    }
+                }
+                return view('main.index', compact('news', 'styles', 'branches', 'teacherId'));
+            }
+        }
+
+
+        return view('main.index', compact('news', 'styles', 'branches', 'customerId', 'teacherId'));
     }
 
     public function branches(Branch $branch) {
@@ -44,34 +66,5 @@ class MainController extends Controller
         $teachers = $teacher->all();
         return view('main.teachers', compact('teachers'));
     }
-    /**
-     *SECTIONS TO SHOW
-     */
-//    public function showIndex() {
-//        return view('main.teachers');
-//    }
-
-
-//    public function newsSlider() {
-//        return view('main.newsCarousel');
-//    }
-
-//    public function commercialSlider() {
-//        //
-//    }
-//
-//    public function showStyles() {
-//        //
-//    }
-//
-//    public function showBranches() {
-//        //
-//    }
-//
-//    public function showFeedback() {
-//        //
-//    }
-
-
 
 }

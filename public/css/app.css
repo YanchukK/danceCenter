@@ -476,3 +476,28 @@ footer {
   width: 20vw;
 }
 
+.nav-logged ul.nav-admin {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.nav-logged ul.nav-admin li {
+  list-style-type: none;
+  margin: 2vh;
+}
+
+.nav-logged ul.nav-admin li > a {
+  color: #FFF300;
+  background: #000000;
+  line-height: 5px;
+  border-radius: 0;
+}
+

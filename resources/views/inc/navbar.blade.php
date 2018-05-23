@@ -71,3 +71,35 @@
         </div>
     </div>
 </nav>
+@if(Auth::check() && Auth::user()->middleware == '1a')
+    <nav class="nav-logged">
+        <ul class="nav-admin">
+            <li>{{ link_to_route('branch.index', 'branches', null, ['class' => 'btn btn-info btn-lg btn-block']) }}</li>
+            <li>{{ link_to_route('group.index', 'groups', null, ['class' => 'btn btn-info btn-lg btn-block']) }}</li>
+            <li>{{ link_to_route('teacher.index', 'teachers', null, ['class' => 'btn btn-info btn-lg btn-block']) }}</li>
+            <li>{{ link_to_route('customer.index', 'customers', null, ['class' => 'btn btn-info btn-lg btn-block']) }}</li>
+            <li>{{ link_to_route('style.index', 'styles', null, ['class' => 'btn btn-info btn-lg btn-block']) }}</li>
+            <li>{{ link_to_route('notice.index', 'notices', null, ['class' => 'btn btn-info btn-lg btn-block']) }}</li>
+            <li>{{ link_to_route('price.index', 'prices', null, ['class' => 'btn btn-info btn-lg btn-block']) }}</li>
+            <li>{{ link_to_route('news.index', 'news', null, ['class' => 'btn btn-info btn-lg btn-block']) }}</li>
+        </ul>
+    </nav>
+@endif
+@if(Auth::check() && Auth::user()->middleware == '2t')
+    <nav class="nav-logged">
+        <ul class="nav-admin">
+            <li>{{ link_to_route('group.index', 'Manage groups', null, ['class' => 'btn btn-info btn-lg btn-block']) }}</li>
+            <li>{{ link_to_route('teacher.show', 'Manage account', $teacherId, ['class' => 'btn btn-info btn-lg btn-block']) }}</li>
+            <li>{{ link_to_route('notice.index', 'Manage notices', null, ['class' => 'btn btn-info btn-lg btn-block']) }}</li>
+        </ul>
+    </nav>
+@endif
+@if(Auth::check() && Auth::user()->middleware == '3c')
+    <nav class="nav-logged">
+        <ul class="nav-admin">
+            <li>{{ link_to_route('group.index', 'Manage groups', null, ['class' => 'btn btn-info btn-lg btn-block']) }}</li>
+            <li>{{ link_to_route('customer.show', 'Manage account', $customerId, ['class' => 'btn btn-info btn-lg btn-block']) }}</li>
+            <li>{{ link_to_route('notice.index', 'Manage notices', null, ['class' => 'btn btn-info btn-lg btn-block']) }}</li>
+        </ul>
+    </nav>
+@endif
